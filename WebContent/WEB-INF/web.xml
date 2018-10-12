@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>ContactsStruts</display-name>
+  <welcome-file-list>
+    <welcome-file>pages/login.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>action</servlet-name>
+    <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
+    <init-param>
+      <param-name>config</param-name>
+      <param-value>/WEB-INF/struts-config.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>action</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  <resource-ref>
+    <description>JDBC resource to access my DB i.e. dfj_hibernate</description>
+    <res-ref-name>jdbc/dsMyDB</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+  </resource-ref>
+  <servlet>
+    <description></description>
+    <display-name>ListServlet</display-name>
+    <servlet-name>ListServlet</servlet-name>
+    <servlet-class>ListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListServlet</servlet-name>
+    <url-pattern>/ListServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MoveToAlterContactFormAction</display-name>
+    <servlet-name>MoveToAlterContactFormAction</servlet-name>
+    <servlet-class>fr.parisnanterre.struts.servletAction.MoveToAlterContactFormAction</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MoveToAlterContactFormAction</servlet-name>
+    <url-pattern>/MoveToAlterContactFormAction</url-pattern>
+  </servlet-mapping>
+  <error-page>
+	<error-code>404</error-code>
+		<location>/pages/login.jsp</location>
+</error-page>
+<error-page>
+	<error-code>500</error-code>
+		<location>/pages/login.jsp</location>
+</error-page>
+</web-app>

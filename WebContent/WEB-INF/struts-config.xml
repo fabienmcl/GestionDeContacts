@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+	<form-beans>
+		<form-bean name="AddContactValidationForm" type="fr.parisnanterre.struts.actionForm.AddContactValidationForm"/>
+		<form-bean name="RemoveContactValidationForm" type="fr.parisnanterre.struts.actionForm.RemoveContactValidationForm"/>
+		<form-bean name="AlterContactValidationForm" type="fr.parisnanterre.struts.actionForm.AlterContactValidationForm"/>
+		<form-bean name="MoveContactValidationForm" type="fr.parisnanterre.struts.actionForm.MoveContactValidationForm"/>
+		<form-bean name="CheckLoginValidationForm" type="fr.parisnanterre.struts.actionForm.CheckLoginValidationForm"/>
+		<form-bean name="SearchContactValidationForm" type="fr.parisnanterre.struts.actionForm.SearchContactValidationForm"/>
+		
+		
+		<form-bean name="contacts" type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="contactId" type="java.lang.Integer" />
+         	<form-property name="contactFirstName" type="java.lang.String" />
+         	<form-property name="conatactLastName" type="java.lang.String" />
+         	<form-property name="conatactEmail" type="java.lang.String" />
+         	<form-property name="ListContact" type="java.util.ArrayList" />
+		</form-bean>
+		
+	</form-beans>
+	<action-mappings>
+	<!-- ========== Partie creation contact  =========================== -->
+	<action path="/creationContact" forward="/pages/creationContact.jsp" />
+
+	<action path="/AddContact" 
+				type="fr.parisnanterre.struts.servletAction.AddContactAction"
+				name="AddContactValidationForm" scope="request" 
+				
+				input="/pages/creationContact.jsp">
+				
+			<forward name="success" path="/pages/good-login.jsp" />
+			<forward name="error" path="/pages/error.jsp" />
+	</action>
+	
+	<!-- ========== Partie suppression contact  =========================== -->
+	<action path="/suppressionContact" forward="/pages/suppressionContact.jsp" />
+
+	<action path="/RemoveContact" 
+				type="fr.parisnanterre.struts.servletAction.RemoveContactAction"
+				name="RemoveContactValidationForm" scope="request" 
+				
+				input="/pages/suppressionContact.jsp">
+				
+			<forward name="success" path="/pages/good-login.jsp" />
+			<forward name="error" path="/pages/error.jsp" />
+	</action>
+	
+	<!-- ========== Partie modification contact  =========================== -->
+	<action path="/modificationContact" forward="/pages/modificationContact.jsp" />
+
+	<action path="/AlterContact" 
+				type="fr.parisnanterre.struts.servletAction.AlterContactAction"
+				name="AlterContactValidationForm" scope="request" 
+				
+				input="/pages/modificationContact.jsp">
+				
+			<forward name="success" path="/pages/good-login.jsp" />
+			<forward name="error" path="/pages/modificationContact.jsp" />
+	</action>
+	<!-- ========== Partie move : liste to modif  =========================== -->
+	<action path="/AlterContact2" 
+				type="fr.parisnanterre.struts.servletAction.MoveToAlterContactFormAction"
+				name="MoveContactValidationForm" scope="request"
+				input="/listeContact">
+				
+			<forward name="success" path="/pages/modificationContact.jsp" />
+			<forward name="error" path="/pages/error.jsp" />
+	</action>
+	
+	<!-- ========== Partie affichage contact JDBC  =========================== -->
+	
+	<action
+			path="/listeContact"
+			type="fr.parisnanterre.struts.servletAction.DisplayListContactAction">
+ 
+			<forward name="success" path="/pages/listeContact.jsp"/>
+ 
+	</action>
+	
+	<!-- ========== Partie recherche dans affichage contact JDBC  =========================== -->
+	<action path="/rechercheContact" forward="/pages/rechercheContact.jsp" />
+	<action path="/SearchContact" 
+				type="fr.parisnanterre.struts.servletAction.SearchContactAction"
+				name="SearchContactValidationForm" scope="request"
+				input="/listeContact">
+				
+			<forward name="success" path="/pages/listeContact.jsp" />
+			<forward name="error" path="/pages/good-login.jsp" />
+	</action>
+	<!-- ========== Partie login  =========================== -->
+	<action path="/CheckLogin" 
+				type="fr.parisnanterre.struts.servletAction.CheckLoginAction"
+				name="CheckLoginValidationForm" scope="request" 
+				
+				input="/pages/login.jsp">
+			<!-- 	
+			<forward name="success" path="/pages/main.jsp" /> -->
+			<forward name="success" path="/pages/good-login.jsp" />
+			<forward name="error" path="/pages/error.jsp" />
+	</action>
+	<!-- ========== fin partie en dev!  =========================== -->
+	
+	
+	</action-mappings>
+	
+
+<!-- ========== Ressources de definitions de messages =========================== -->
+	<message-resources parameter="Resources" />
+
+</struts-config>
