@@ -3,11 +3,26 @@
 <%@taglib uri="http://struts.apache.org/tags-logic" prefix="logic"%>
 <html>
 <head>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <style>
 #notDisplay {
 	display: none;
 }
+input{width:100px;} /* needed only to fit in the "Run code snippet" box */
 
+.wwFormTable tr {
+    display: inline-block;
+    padding:15px;
+    padding-bottom: 0;
+    margin-bottom: 0px;
+}
+</style>
+<!-- 
 ul {
 	list-style-type: none;
 	margin: 0;
@@ -52,13 +67,65 @@ button {
      the labels and their text fields */
 	margin-left: .5em;
 }
+
 </style>
+-->
 <title><bean:message key="list.page.title"/></title>
 </head>
 <body>
+
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Gestionnaire de Contact</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Ajouter<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a HREF="creationContact.do"><bean:message key="link.add.contact"/></a></li>
+          <li><a href="#">Entreprise</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Liste des contactsGroups</a></li>
+    </ul>
+     <!--  
+    <form class="navbar-form navbar-left" action="/action_page.php">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+    -->
+    <fieldset>
+			<html:form action="/SearchContact">
+				<html:errors />
+				<table class="wwFormTable" >
+					<tr>
+						<td align="left"><html:text property="element" size="10"
+								maxlength="30" value="" /></td>
+					</tr>
+					
+
+					<tr>
+						<td align="right"><html:submit><bean:message key="form.validate"/></html:submit></td>
+					</tr>
+				</table>
+
+
+			</html:form>
+		</fieldset>
+    	
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span></a></li>
+    </ul>
+  </div>
+</nav>
+
 	<div align="center">
 		<h1><bean:message key="list.page.h"/></h1>
-		
+		<!--  
 		<a HREF="creationContact.do"><bean:message key="link.add.contact"/></a>
 		<fieldset>
 			<legend><bean:message key="form.search.legend"/> </legend>
@@ -85,6 +152,7 @@ button {
 
 			</html:form>
 		</fieldset>
+		-->
 		<ul>
 			<logic:iterate name="listContactsJDBC" id="itemJDBC">
 				<li>
