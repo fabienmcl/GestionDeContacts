@@ -13,63 +13,59 @@
 #notDisplay {
 	display: none;
 }
-input{width:100px;} /* needed only to fit in the "Run code snippet" box */
-
 .wwFormTable tr {
     display: inline-block;
     padding:15px;
     padding-bottom: 0;
     margin-bottom: 0px;
+}body{
+  padding:20px 20px;
+}
+
+.results tr[visible='false'],
+.no-result{
+  display:none;
+}
+
+.results tr[visible='true']{
+  display:table-row;
+}
+
+.counter{
+  padding:8px; 
+  color:#ccc;
 }
 </style>
-<!-- 
-ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-}
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	  $(".search").keyup(function () {
+	    var searchTerm = $(".search").val();
+	    var listItem = $('.results tbody').children('tr');
+	    var searchSplit = searchTerm.replace(/ /g, "'):containsi('")
+	    
+	  $.extend($.expr[':'], {'containsi': function(elem, i, match, array){
+	        return (elem.textContent || elem.innerText || '').toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+	    }
+	  });
+	    
+	  $(".results tbody tr").not(":containsi('" + searchSplit + "')").each(function(e){
+	    $(this).attr('visible','false');
+	  });
 
-li {
-	font: 200 20px/1.5 Helvetica, Verdana, sans-serif;
-	border-bottom: 1px solid #ccc;
-}
+	  $(".results tbody tr:containsi('" + searchSplit + "')").each(function(e){
+	    $(this).attr('visible','true');
+	  });
 
-ul div {
-	text-decoration: none;
-	color: #000;
-	display: inline-block;
-	width: 200px;
-}
+	  var jobCount = $('.results tbody tr[visible="true"]').length;
+	    $('.counter').text(jobCount + ' item');
 
-li {
-	/* Just to center the form on the page */
-	margin: 0 auto;
-	width: 400px;
-	/* To see the limits of the form */
-	padding: 1em;
-	border: 1px solid #CCC;
-	border-radius: 1em;
-}
+	  if(jobCount == '0') {$('.no-result').show();}
+	    else {$('.no-result').hide();}
+			  });
+	});
+</script>
 
-li form {
-	/* Just to center the form on the page */
-	margin: 0 auto;
-	display: inline-block;
-}
-
-.button {
-	/* To position the buttons to the same position of the text fields */
-	padding-left: 90px; /* same size as the label elements */
-}
-
-button {
-	/* This extra magin represent the same space as the space between
-     the labels and their text fields */
-	margin-left: .5em;
-}
-
-</style>
--->
 <title><bean:message key="list.page.title"/></title>
 </head>
 <body>
@@ -90,14 +86,7 @@ button {
       </li>
       <li><a href="#">Liste des contactsGroups</a></li>
     </ul>
-     <!--  
-    <form class="navbar-form navbar-left" action="/action_page.php">
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Search">
-      </div>
-      <button type="submit" class="btn btn-default">Submit</button>
-    </form>
-    -->
+    <!-- 
     <fieldset>
 			<html:form action="/SearchContact">
 				<html:errors />
@@ -116,7 +105,7 @@ button {
 
 			</html:form>
 		</fieldset>
-    	
+    	-->
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#"><span class="glyphicon glyphicon-log-in"></span></a></li>
     </ul>
@@ -124,7 +113,7 @@ button {
 </nav>
 
 	<div align="center">
-		<h1><bean:message key="list.page.h"/></h1>
+		<h1>Gestionnaire de contact</h1>
 		<!--  
 		<a HREF="creationContact.do"><bean:message key="link.add.contact"/></a>
 		<fieldset>
@@ -153,6 +142,7 @@ button {
 			</html:form>
 		</fieldset>
 		-->
+		<!-- 
 		<ul>
 			<logic:iterate name="listContactsJDBC" id="itemJDBC">
 				<li>
@@ -180,7 +170,8 @@ button {
 							<td align="right"><html:submit><bean:message key="form.validate.remove"/></html:submit></td>
 						</tr>
 
-					</html:form> <html:form action="/AlterContact2">
+					</html:form> 
+					<html:form action="/AlterContact2">
 						<html:errors />
 						<table id="notDisplay">
 
@@ -215,7 +206,61 @@ button {
 				</li>
 			</logic:iterate>
 		</ul>
+	-->
 	</div>
-	
+
+	<div>
+	<div class="form-group pull-right">
+    <input type="text" class="search form-control" placeholder="What you looking for?">
+</div>
+<span class="counter pull-right"></span>
+<table  class="table table-striped table-hover table-bordered results">
+  <thead > 
+    <tr>
+      <th>#</th>
+      <th class="col-md-5 col-xs-5">Lastname</th>
+      <th class="col-md-4 col-xs-4">FirstName</th>
+      <th class="col-md-3 col-xs-3">email</th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr class="warning no-result">
+      <td colspan="4"><i class="fa fa-warning"></i> No result</td>
+    </tr>
+  </thead>
+  <tbody>
+  <tbody>
+			<logic:iterate name="listContactsJDBC" id="itemJDBC">
+		        <tr class="clickable-row">
+		        	<td><bean:write name="itemJDBC" property="id"/></td>
+		            <td><bean:write name="itemJDBC" property="lastName"/></td>
+		            <td><bean:write name="itemJDBC" property="firstName"/></td>
+		            <td><bean:write name="itemJDBC" property="email"/></td>
+		            <td>
+		            	<html:form action="/AlterContact2">
+							<html:hidden property="id" name="itemJDBC" value="${itemJDBC.id}" />
+							<html:hidden property="firstName" name="itemJDBC" value="${itemJDBC.firstName}" />
+							<html:hidden property="lastName" name="itemJDBC" value="${itemJDBC.lastName}" />
+							<html:hidden property="email" name="itemJDBC" value="${itemJDBC.email}" />
+							<html:submit styleClass="btn btn-danger btn-xs">
+										Edit
+							</html:submit>
+						</html:form>
+					</td>
+		            <td>
+		            	<html:form action="/RemoveContact">
+							<html:hidden property="id" name="itemJDBC" value="${itemJDBC.id}" />
+							<html:hidden property="email" name="itemJDBC" value="${itemJDBC.email}" />
+							<html:submit styleClass="btn btn-danger btn-xs">
+										Delete
+							</html:submit>
+						</html:form>
+					</td>
+					
+		        </tr>
+	        </logic:iterate>
+</tbody>
+</table>
+	</div>	
 </body>
 </html>
