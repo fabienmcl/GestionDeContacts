@@ -16,11 +16,15 @@ import javax.sql.DataSource;
 
 
 
-public class DAOContact {
+public class DAOContact extends DAO {
 	
 	private final static String RESOURCE_JDBC = "java:comp/env/jdbc/dsMyDB";
 	List<Contact> contacts;
 	
+	
+	public DAOContact() {
+        super();
+    }
 	
 	public Long countContact() throws SQLException{
 		Long size = (long) 0;
@@ -56,35 +60,29 @@ public class DAOContact {
 	}
 	
 	public String addContact(final long id, final String firstName, final String lastName, final String email) {
-		
-		try {
-			countContact();
-			final Context lContext = new InitialContext();
-			final DataSource lDataSource = (DataSource) lContext.lookup(RESOURCE_JDBC);
-			final Connection lConnection  = lDataSource.getConnection();
+		String result = null;
+		String rq = "INSERT INTO CONTACT(ID_CONTACT, FIRSTNAME, LASTNAME, EMAIL) VALUES(?, ?, ?, ?)";
+		try{
 			
-			// adding a new contact
-			final PreparedStatement lPreparedStatementCreation = 
-					
-			lConnection.prepareStatement("INSERT INTO CONTACT(ID_CONTACT, FIRSTNAME, LASTNAME, EMAIL) VALUES(?, ?, ?, ?)");
-			
-			lPreparedStatementCreation.setLong(1, countContact());
-			lPreparedStatementCreation.setString(2, firstName);
-			lPreparedStatementCreation.setString(3, lastName);
-			lPreparedStatementCreation.setString(4, email);
-			lPreparedStatementCreation.executeUpdate();
-			
-			return null;
-		} catch (NamingException e) {
-		
-			return "NamingException : " + e.getMessage();
-		
-		} catch (SQLException e) {
-
-			return "SQLException : " + e.getMessage();
+			super.setPreparedStatement(super.getContext().prepareStatement(rq, Statement.RETURN_GENERATED_KEYS));
+			PreparedStatement preparedStatement = super.getPreparedStatement();
+			preparedStatement.setLong(1, countContact());
+			preparedStatement.setString(2, firstName);
+			preparedStatement.setString(3, lastName);
+			preparedStatement.setString(4, email);
+			super.setPreparedStatement(preparedStatement);
+			super.getPreparedStatement().executeUpdate();
+			super.close();
 			
 		}
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return result;
+		
 	}
+	
 	public String alterContact(final long id, final String firstName, final String lastName, final String email) {
 		try {
 			final Context lContext = new InitialContext();
@@ -109,27 +107,18 @@ public class DAOContact {
 		}
 	}
 	public String removeContact(final long id, final String email){
-		try {
-			final Context lContext = new InitialContext();
-			final DataSource lDataSource = (DataSource) lContext.lookup(RESOURCE_JDBC);
-			final Connection lConnection  = lDataSource.getConnection();
-			System.out.println("je suis dans remove conatct dao");
-			// removing a new contact
-			String rq = "DELETE FROM CONTACT WHERE ID_CONTACT="+id+" AND EMAIL='"+email+"'";
-			final PreparedStatement lPreparedStatementCreation = lConnection.prepareStatement(rq);
-
-			lPreparedStatementCreation.executeUpdate();
-			
-			return null;
-		} catch (NamingException e) {
-		
-			return "NamingException : " + e.getMessage();
-		
-		} catch (SQLException e) {
-
-			return "SQLException : " + e.getMessage();
-			
+		String result = null;
+		String rq = "DELETE FROM CONTACT WHERE ID_CONTACT="+id+" AND EMAIL='"+email+"'";
+		try{
+			super.setPreparedStatement(super.getContext().prepareStatement(rq));
+			super.getPreparedStatement().executeUpdate();
+			super.close();
 		}
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return result;
 	}
 	
 	public List<Contact> searchContact(String element){
@@ -241,6 +230,7 @@ public class DAOContact {
 			return null;
 		}
 	}
+
 	public List<Contact> getListContact()  {
 		System.out.println("step 1 : DAOContact entree dans getListcontact");
 		try {

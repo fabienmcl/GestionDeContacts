@@ -84,6 +84,7 @@ $(document).ready(function() {
           <li><a href="#">Entreprise</a></li>
         </ul>
       </li>
+      <li><a HREF="creationContact.do"><bean:message key="link.add.contact"/></a></li>
       <li><a href="#">Liste des contactsGroups</a></li>
     </ul>
     <!-- 
