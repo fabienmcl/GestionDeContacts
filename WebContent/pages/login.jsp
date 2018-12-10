@@ -296,7 +296,8 @@ h1{
     <fieldset>
 			<legend><bean:message key="form.login.legend"/> </legend>
 			<html:form action="/CheckLogin">
-				<html:errors />
+				<html:errors property="first name"/>
+				<html:errors property="last name"/>
 				<table>
 
 					

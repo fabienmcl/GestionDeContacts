@@ -2,8 +2,8 @@ package service;
 
 import java.util.List;
 
-import fr.parisnanterre.struts.domain.Contact;
-import fr.parisnanterre.struts.domain.DAOContact;
+import domain.Contact;
+import domain.DAOContact;
 
 public class ContactService {
 	
