@@ -137,7 +137,7 @@ body {
 				<h1>Oops!</h1>
 				<h2>400 - The Page can't be found</h2>
 			</div>
-			<a href="#">Go TO Homepage</a>
+			<a href="/pages/login.jsp">Go TO Homepage</a>
 		</div>
 	</div>
 

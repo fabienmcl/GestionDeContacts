@@ -96,6 +96,7 @@ $(document).ready(function() {
 
 	<div align="center">
 		<h1>Gestionnaire de contact</h1>
+		
 	</div>
 
 	<div>
