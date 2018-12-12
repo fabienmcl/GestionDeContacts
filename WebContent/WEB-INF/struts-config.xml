@@ -11,7 +11,6 @@
 		<form-bean name="AlterContactValidationForm" type="actionForm.AlterContactValidationForm"/>
 		<form-bean name="MoveContactValidationForm" type="actionForm.MoveContactValidationForm"/>
 		<form-bean name="CheckLoginValidationForm" type="actionForm.CheckLoginValidationForm"/>
-		<form-bean name="SearchContactValidationForm" type="actionForm.SearchContactValidationForm"/>
 		
 		
 		<form-bean name="contacts" type="org.apache.struts.validator.DynaValidatorForm">
@@ -33,8 +32,8 @@
 				
 				input="/pages/creationContact.jsp">
 				
-			<forward name="success" path="/pages/good-login.jsp" />
-			<forward name="error" path="/pages/error.jsp" />
+			<forward name="success" path="/listeContact.do" />
+			<forward name="error" path="/pages/creationContact.jsp" />
 	</action>
 	
 	<!-- ========== Partie suppression contact  =========================== -->
@@ -46,8 +45,8 @@
 				
 				input="/pages/suppressionContact.jsp">
 				
-			<forward name="success" path="/pages/good-login.jsp" />
-			<forward name="error" path="/pages/error.jsp" />
+			<forward name="success" path="/listeContact.do" />
+			<forward name="error" path="/listeContact.do" />
 	</action>
 	
 	<!-- ========== Partie modification contact  =========================== -->
@@ -59,7 +58,7 @@
 				
 				input="/pages/modificationContact.jsp">
 				
-			<forward name="success" path="/pages/good-login.jsp" />
+			<forward name="success" path="/listeContact.do" />
 			<forward name="error" path="/pages/modificationContact.jsp" />
 	</action>
 	<!-- ========== Partie move : liste to modif  =========================== -->
@@ -69,7 +68,7 @@
 				input="/listeContact">
 				
 			<forward name="success" path="/pages/modificationContact.jsp" />
-			<forward name="error" path="/pages/error.jsp" />
+			<forward name="error" path="/listeContact.do" />
 	</action>
 	
 	<!-- ========== Partie affichage contact JDBC  =========================== -->
@@ -82,16 +81,7 @@
  
 	</action>
 	
-	<!-- ========== Partie recherche dans affichage contact JDBC  =========================== -->
-	<action path="/rechercheContact" forward="/pages/rechercheContact.jsp" />
-	<action path="/SearchContact" 
-				type="servletAction.SearchContactAction"
-				name="SearchContactValidationForm" scope="request"
-				input="/listeContact">
-				
-			<forward name="success" path="/pages/listeContact.jsp" />
-			<forward name="error" path="/pages/good-login.jsp" />
-	</action>
+	
 	<!-- ========== Partie login  =========================== -->
 	
 	<action path="/CheckLogin" type="servletAction.CheckLoginAction" name="CheckLoginValidationForm" scope="request"
