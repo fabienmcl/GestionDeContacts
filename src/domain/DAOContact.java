@@ -18,9 +18,6 @@ import javax.sql.DataSource;
 
 public class DAOContact extends DAO {
 	
-	private final static String RESOURCE_JDBC = "java:comp/env/jdbc/dsMyDB";
-	List<Contact> contacts;
-	
 	
 	public DAOContact() {
         super();
