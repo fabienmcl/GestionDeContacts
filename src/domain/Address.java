@@ -10,7 +10,17 @@ public class Address {
 	private Contact contact;
 
 	public Address() {
+		
 	}
+	
+	public Address(long id){
+		this.addressId = id;
+		this.street = null;
+		this.city = null;
+		this.zip = null;
+		this.contact = null;
+	}
+	
 
 	public Address(long id, String street, String city, String zip, String country) {
 		this(street, city, zip, country);

@@ -48,7 +48,7 @@ public class DAOContact extends DAO {
 	
 	public String removeContact(final long id, final String email){
 		String result = null;
-		String rq = "DELETE FROM CONTACT WHERE ID_CONTACT="+id+" AND EMAIL='"+email+"'";
+		String rq = "DELETE FROM CONTACT WHERE ID_CONTACT="+id+" AND EMAIL='"+email+"' ;";
 		try{
 			super.setPreparedStatement(super.getContext().prepareStatement(rq));
 			super.getPreparedStatement().executeUpdate();

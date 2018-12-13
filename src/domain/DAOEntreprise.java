@@ -29,7 +29,7 @@ public class DAOEntreprise extends DAO{
 	
 	public String addEntreprise(Entreprise entreprise){
 		String result = null;
-		String rq = "INSERT INTO ENTREPRISE (numSiret) VALUES(?)";
+		String rq = "INSERT INTO ENTREPRISE (numSiret) VALUES(?) ;";
 		try{
 			
 			super.setPreparedStatement(super.getContext().prepareStatement(rq, Statement.RETURN_GENERATED_KEYS));
@@ -46,7 +46,7 @@ public class DAOEntreprise extends DAO{
 		}
 		return result;
 	}
-	public String alterEntreprise(Entreprise entreprise, int id){
+	public String alterEntreprise(Entreprise entreprise){
 		String result = null;
 		String rq = "UPDATE ENTREPRISE SET numSiret = ? WHERE ID = ?;";
 		
@@ -54,7 +54,7 @@ public class DAOEntreprise extends DAO{
 			super.setPreparedStatement(super.getContext().prepareStatement(rq, Statement.RETURN_GENERATED_KEYS));
 			PreparedStatement preparedStatement = super.getPreparedStatement();
 			preparedStatement.setInt(1, entreprise.getNumSiret());
-			preparedStatement.setInt(2, id);
+			preparedStatement.setLong(2, entreprise.getId());
 			
 			super.getPreparedStatement().executeUpdate();
 			
