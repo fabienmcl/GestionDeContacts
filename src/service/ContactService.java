@@ -13,6 +13,10 @@ public class ContactService {
 		this.contactDAO = new DAOContact();
 	}
 	
+	public String addContact(Contact contact){
+		return this.contactDAO.addContact(contact);
+	}
+	
 	public List<Contact> getListContact(){
 		return this.contactDAO.getListContact();
 	}

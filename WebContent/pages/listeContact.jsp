@@ -78,14 +78,8 @@ $(document).ready(function() {
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Home</a></li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Ajouter<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a HREF="creationContact.do"><bean:message key="link.add.contact"/></a></li>
-          <li><a href="#">Entreprise</a></li>
-        </ul>
-      </li>
       <li><a HREF="creationContact.do"><bean:message key="link.add.contact"/></a></li>
-      <li><a href="#">Liste des contactsGroups</a></li>
+     
     </ul>
     
     <ul class="nav navbar-nav navbar-right">

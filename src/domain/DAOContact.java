@@ -23,16 +23,16 @@ public class DAOContact extends DAO {
         super();
     }
 	
-	public String addContact(final long id, final String firstName, final String lastName, final String email) {
+	public String addContact(Contact contact) {
 		String result = null;
 		String rq = "INSERT INTO CONTACT(FIRSTNAME, LASTNAME, EMAIL) VALUES(?, ?, ?)";
 		try{
 			
 			super.setPreparedStatement(super.getContext().prepareStatement(rq, Statement.RETURN_GENERATED_KEYS));
 			PreparedStatement preparedStatement = super.getPreparedStatement();
-			preparedStatement.setString(1, firstName);
-			preparedStatement.setString(2, lastName);
-			preparedStatement.setString(3, email);
+			preparedStatement.setString(1, contact.getFirstName());
+			preparedStatement.setString(2, contact.getLastName());
+			preparedStatement.setString(3, contact.getEmail());
 			super.setPreparedStatement(preparedStatement);
 			super.getPreparedStatement().executeUpdate();
 			super.close();

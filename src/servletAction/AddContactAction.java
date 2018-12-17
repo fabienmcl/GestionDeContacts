@@ -16,7 +16,9 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
 import actionForm.AddContactValidationForm;
+import domain.Contact;
 import domain.DAOContact;
+import service.ContactService;
 
 public class AddContactAction extends Action {
 
@@ -28,6 +30,10 @@ public class AddContactAction extends Action {
 		
 		final AddContactValidationForm lForm=(AddContactValidationForm)pForm;
 		
+		final ContactService contactService = new ContactService(); 
+		
+		
+		
 		final long id = lForm.getId();
 		
 		final String firstName = lForm.getFirstName();
@@ -35,9 +41,11 @@ public class AddContactAction extends Action {
 		final String email = lForm.getEmail();
 
 		// create a new Contact
-		final DAOContact lDAOContact = new DAOContact();
+		Contact contact = new Contact(firstName, lastName, email);
+		//final DAOContact lDAOContact = new DAOContact();
 		System.out.println("je suis dans addContactAction step dao");
-		final String lError = lDAOContact.addContact(id, firstName, lastName, email);
+		//final String lError = lDAOContact.addContact(id, firstName, lastName, email);
+		final String lError =contactService.addContact(contact);
 		System.out.println("je suis dans addContactAction step lerror");
 		System.out.println(lError);
 		

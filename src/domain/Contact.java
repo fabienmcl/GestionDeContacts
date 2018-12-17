@@ -13,6 +13,13 @@ public class Contact {
 	private Set<ContactGroup> books = new HashSet<ContactGroup>();
 
 	public Contact() {
+		super();
+		this.firstName = null;
+		this.lastName = null;
+		this.email = null;
+		this.address = null;
+		this.phones = null;
+		this.books = null;
 	}
 	
 	/**
@@ -38,6 +45,22 @@ public class Contact {
 	public Contact(long id, String firstName, String lastName, String email) {
 		super();
 		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.address = null;
+		this.phones = null;
+		this.books = null;
+	}
+	
+	/**
+	
+	 * @param firstName
+	 * @param lastName
+	 * @param email
+	 */
+	public Contact(String firstName, String lastName, String email) {
+		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
