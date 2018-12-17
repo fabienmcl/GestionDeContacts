@@ -13,6 +13,7 @@ import org.apache.struts.action.ActionMessages;
 
 import actionForm.RemoveContactValidationForm;
 import domain.DAOContact;
+import service.ContactService;
 
 public class RemoveContactAction extends Action {
 
@@ -23,7 +24,7 @@ public class RemoveContactAction extends Action {
 		System.out.println("je suis dans removeContactAction");
 		
 		final RemoveContactValidationForm lForm=(RemoveContactValidationForm)pForm;
-		
+		final ContactService contactService = new ContactService(); 
 		
 		System.out.println("je suis dans removeContactAction step pForm");
 		final long id = lForm.getId();
@@ -31,9 +32,11 @@ public class RemoveContactAction extends Action {
 		final String email = lForm.getEmail();
 		
 		// create a new Contact
-		final DAOContact lDAOContact = new DAOContact();
+		//final DAOContact lDAOContact = new DAOContact();
 		System.out.println("je suis dans removeContactAction step dao");
-		final String lError = lDAOContact.removeContact(id, email);
+		//final String lError = lDAOContact.removeContact(id, email);
+		final String lError = contactService.removeContact(id, email);
+		
 		System.out.println("je suis dans removeContactAction step lerror");
 		System.out.println(lError);
 		
