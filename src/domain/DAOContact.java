@@ -141,6 +141,9 @@ public class DAOContact extends DAO {
 		{
 			e.printStackTrace();
 		}
+		if(listContacts.isEmpty()==true){
+			listContacts.add(new Contact());
+		}
 		return listContacts;
 	}
 	

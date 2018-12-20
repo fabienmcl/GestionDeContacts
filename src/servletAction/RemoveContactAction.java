@@ -35,7 +35,10 @@ public class RemoveContactAction extends Action {
 		//final DAOContact lDAOContact = new DAOContact();
 		System.out.println("je suis dans removeContactAction step dao");
 		//final String lError = lDAOContact.removeContact(id, email);
-		final String lError = contactService.removeContact(id, email);
+		
+		final String lError = email==null ? null : contactService.removeContact(id, email);
+			
+		
 		
 		System.out.println("je suis dans removeContactAction step lerror");
 		System.out.println(lError);

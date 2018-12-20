@@ -20,6 +20,9 @@ public class ContactService {
 	public List<Contact> getListContact(){
 		return this.contactDAO.getListContact();
 	}
+	public String alterContact(Contact contact){
+		return this.contactDAO.alterContact(contact.getId(), contact.getFirstName(), contact.getLastName(), contact.getEmail());
+	}
 	
 	public String removeContact(final long id, final String email){
 		return this.contactDAO.removeContact(id, email);
