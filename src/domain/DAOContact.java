@@ -1,187 +1,99 @@
 package domain;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-
-import org.hibernate.Session;
-
-import util.HibernateUtil;
+import org.hibernate.Query;
 
 
 
-public class DAOContact extends DAO {
+public class DAOContact extends DAOHibernate {
 	
 	
 	public DAOContact() {
         super();
     }
 	public String addContact(Contact contact) {
-		Session session = null;
+		String result = null;
+		super.open();
 		
-		//Address address = new Address(1, "etoile", "Paris", "test", "France");
-		//contact.setAddress(address);
-		 
-
 		try {
-
-			// utilisation de la classe utilitaire HibernateUtil
-			// qui applique le pattern singleton et
-			// qui assure que SessionFactory ne sera instanciee qu'une seule
-			// fois
-
-			session = HibernateUtil.getSessionFactory().getCurrentSession();
-
-			// mettre les actions entre une transaction
-			org.hibernate.Transaction tx = session.beginTransaction();
-
-			session.save(contact);
-
-			// pour montrer qu'hibernate met � jour systematiquement la base de
-			// donn�es
-			// et sans faire un save � nouveau
-			contact.setFirstName("Robin");
-
 			
-			System.out.println("before Commit instruction");
-			// Commiter la transaction sinon rien ne se passe
-			tx.commit();
-
-			System.out.println("Done");
+			super.getSession().save(contact);
+			contact.setFirstName("Robin");
+			super.close();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 
 		}
-
-		return null;
-	}
-	/*
-	public String addContact(Contact contact) {
-		String result = null;
-		String rq = "INSERT INTO CONTACT(FIRSTNAME, LASTNAME, EMAIL) VALUES(?, ?, ?)";
-		try{
-			
-			super.setPreparedStatement(super.getContext().prepareStatement(rq, Statement.RETURN_GENERATED_KEYS));
-			PreparedStatement preparedStatement = super.getPreparedStatement();
-			preparedStatement.setString(1, contact.getFirstName());
-			preparedStatement.setString(2, contact.getLastName());
-			preparedStatement.setString(3, contact.getEmail());
-			super.setPreparedStatement(preparedStatement);
-			super.getPreparedStatement().executeUpdate();
-			super.close();
-			
-		}
-		catch (SQLException e) 
-		{
-			e.printStackTrace();
-		}
 		return result;
-		
-	}*/
+	}
+	
 	
 	public String removeContact(final long id, final String email){
 		String result = null;
-		String rq = "DELETE FROM CONTACT WHERE ID_CONTACT="+id+" AND EMAIL='"+email+"' ;";
-		try{
-			super.setPreparedStatement(super.getContext().prepareStatement(rq));
-			super.getPreparedStatement().executeUpdate();
+		Contact contact = getContact(id);
+		super.open();
+		
+		try {
+			super.getSession().delete(Contact.class, id);
+			super.getSession().delete(contact);
 			super.close();
-		}
-		catch (SQLException e) 
-		{
-			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
 		return result;
 	}
 	
 	public Contact getContact(final long id){
-		Contact c = new Contact(id);
-		
-		String rq = "SELECT * FROM CONTACT WHERE ID_CONTACT= ? ;";
-		try{
-			
-			super.setPreparedStatement(super.getContext().prepareStatement(rq, Statement.RETURN_GENERATED_KEYS));
-			PreparedStatement preparedStatement = super.getPreparedStatement();
-			preparedStatement.setLong(1, id);
-			super.setPreparedStatement(preparedStatement);
-			ResultSet result = super.getPreparedStatement().executeQuery();
-			
-			while(result.next()){
-				c.setFirstName(result.getString("FIRSTNAME"));
-				c.setLastName(result.getString("LASTNAME"));
-				c.setEmail(result.getString("EMAIL"));
-			}
-			super.close();
-		}catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return c;
+		super.open();
+		Contact contact = (Contact) super.getSession().get(Contact.class, id);
+		super.close();
+		return contact;
 	}
 	
 	public String alterContact(final long id, final String firstName, final String lastName, final String email) {
-		String result = null;
-		String rq = "UPDATE contact SET firstName = ?, lastName = ?, email = ? WHERE ID_CONTACT = ?;";
 		
-		try{
-			super.setPreparedStatement(super.getContext().prepareStatement(rq, Statement.RETURN_GENERATED_KEYS));
-			PreparedStatement preparedStatement = super.getPreparedStatement();
-			preparedStatement.setString(1, firstName);
-			preparedStatement.setString(2, lastName);
-			preparedStatement.setString(3, email);
-			preparedStatement.setLong(4, id);
-			
-			super.getPreparedStatement().executeUpdate();
-			
+		String result = null;
+		/*
+		Contact contact = getContact(id);
+		contact.setFirstName(firstName);
+		contact.setLastName(lastName);
+		contact.setEmail(email);*/
+		Contact contact = new Contact(id, firstName, lastName, email);
+		super.open();
+		try {
+			super.getSession().update(contact);
 			super.close();
-		}
-		catch (SQLException e) 
-		{
-			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+
 		}
 		return result;
 	}
 	
-	public List<Contact> getListContact(){
+	
+	public List<Contact> getListContact() {
 		List<Contact> listContacts = new ArrayList<Contact>();
-		ResultSet result = null;
-		String rq = "SELECT * FROM CONTACT ;";
-		try{
-			super.setPreparedStatement(super.getContext().prepareStatement(rq));
-			result = super.getPreparedStatement().executeQuery();
+		super.open();
+		try {
+
+			StringBuilder stringBuilder = new StringBuilder();
+			stringBuilder.append("SELECT * FROM  Contact_Table");
+
+			//Query query = super.getSession().createQuery(stringBuilder.toString());
 			
-			while(result.next()){
-				System.out.print("- "+result.getString("id_contact")+", ");
-				System.out.print(result.getString("firstname")+", ");
-				System.out.print(result.getString("lastname")+", ");
-				System.out.println(result.getString("email"));
-				Contact c = new Contact(Long.parseLong(
-								result.getString("id_contact")),
-								result.getString("firstname"),
-								result.getString("lastname"),
-								result.getString("email"));
-				System.out.println(c.toString());
-				
+
+			@SuppressWarnings("unchecked")
+			List<Contact> listResultQuery = (List<Contact>) super.getSession().createCriteria(Contact.class).list();//query.list();
+			for (Contact contact : listResultQuery) {
+				Contact c = new Contact(contact.getLastName(), contact.getFirstName(), contact.getEmail());
+				c.setId(contact.getId());
 				listContacts.add(c);
-				
-			
-			}
-			
-			
+			}	
+
 			super.close();
-		}
-		catch (SQLException e) 
-		{
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		if(listContacts.isEmpty()==true){
