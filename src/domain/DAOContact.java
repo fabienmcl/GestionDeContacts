@@ -14,6 +14,10 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.hibernate.Session;
+
+import util.HibernateUtil;
+
 
 
 public class DAOContact extends DAO {
@@ -22,7 +26,46 @@ public class DAOContact extends DAO {
 	public DAOContact() {
         super();
     }
-	
+	public String addContact(Contact contact) {
+		Session session = null;
+		
+		//Address address = new Address(1, "etoile", "Paris", "test", "France");
+		//contact.setAddress(address);
+		 
+
+		try {
+
+			// utilisation de la classe utilitaire HibernateUtil
+			// qui applique le pattern singleton et
+			// qui assure que SessionFactory ne sera instanciee qu'une seule
+			// fois
+
+			session = HibernateUtil.getSessionFactory().getCurrentSession();
+
+			// mettre les actions entre une transaction
+			org.hibernate.Transaction tx = session.beginTransaction();
+
+			session.save(contact);
+
+			// pour montrer qu'hibernate met � jour systematiquement la base de
+			// donn�es
+			// et sans faire un save � nouveau
+			contact.setFirstName("Robin");
+
+			
+			System.out.println("before Commit instruction");
+			// Commiter la transaction sinon rien ne se passe
+			tx.commit();
+
+			System.out.println("Done");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+
+		}
+
+		return null;
+	}
+	/*
 	public String addContact(Contact contact) {
 		String result = null;
 		String rq = "INSERT INTO CONTACT(FIRSTNAME, LASTNAME, EMAIL) VALUES(?, ?, ?)";
@@ -44,7 +87,7 @@ public class DAOContact extends DAO {
 		}
 		return result;
 		
-	}
+	}*/
 	
 	public String removeContact(final long id, final String email){
 		String result = null;
