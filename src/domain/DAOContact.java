@@ -36,8 +36,9 @@ public class DAOContact extends DAOHibernate {
 		super.open();
 		
 		try {
-			super.getSession().delete(Contact.class, id);
-			super.getSession().delete(contact);
+			//super.getSession().delete(contact);
+			String hql = "delete from Contact_table where ID_CONTACT="+contact.getId()+" ;";
+			super.getSession().createQuery(hql).executeUpdate();
 			super.close();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
