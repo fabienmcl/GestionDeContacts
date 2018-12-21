@@ -28,7 +28,10 @@ public class DisplayListContactAction extends Action{
 		
 		if(listContactsJDBC.isEmpty()) {
 			// If any exception, return the "error" forward
-			return mapping.findForward("error");
+			//return mapping.findForward("error");
+
+			request.setAttribute("listContactsJDBC", listContactsJDBC );
+			return mapping.findForward("success");
 			
 		}
 		else {

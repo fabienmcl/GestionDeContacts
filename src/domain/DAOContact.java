@@ -54,7 +54,7 @@ public class DAOContact extends DAOHibernate {
 	}
 	
 	public String alterContact(final long id, final String firstName, final String lastName, final String email) {
-		
+	
 		String result = null;
 		/*
 		Contact contact = getContact(id);
@@ -97,9 +97,9 @@ public class DAOContact extends DAOHibernate {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		if(listContacts.isEmpty()==true){
+		/*if(listContacts.isEmpty()==true){
 			listContacts.add(new Contact());
-		}
+		}*/
 		return listContacts;
 	}
 	
