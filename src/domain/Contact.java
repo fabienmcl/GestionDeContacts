@@ -22,6 +22,18 @@ public class Contact {
 		this.books = null;
 	}
 	
+	
+	
+	public Contact(String firstName, String lastName, String email, Address address) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.address = address;
+	}
+
+
+
 	/**
 	 * @param id
 	 */

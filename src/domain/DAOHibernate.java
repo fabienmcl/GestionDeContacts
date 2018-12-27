@@ -24,7 +24,7 @@ public class DAOHibernate {
 
 	public void open(){
 		try {
-			this.tansaction = this.session.beginTransaction();
+			this.tansaction = HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
 	    } catch (Exception e) {
 	    	e.printStackTrace();
 	    }
@@ -36,11 +36,11 @@ public class DAOHibernate {
         } catch (Exception e) {
         	e.printStackTrace();
         }
-		this.tansaction = null;
+		//this.tansaction = null;
 	}
 	
 	public Session getSession(){
-		return this.session;
+		return HibernateUtil.getSessionFactory().getCurrentSession();
 	}
 
 }
