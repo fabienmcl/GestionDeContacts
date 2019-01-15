@@ -10,10 +10,13 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop.xsd">
-        <!-- 
-        <bean name="daoMaster" class="domain.DAO"></bean>
-        <bean id="idDaoContact" class="domain.DAOContact"/>
-        <bean name="serviceContact" class="service.ContactService">
-			<property name="cdao" ref="idDaoContact"></property>
-		</bean>-->
+
+	<!-- liste des DOA -->
+	<bean id="DAOContact" class="domain.DAOContact"/>
+	
+	<!-- Liste des classes services associé -->
+	<bean id="contactService" class="service.ContactService">
+		<property name="DAOContact" ref="DAOContact"/>
+	</bean>
+
 </beans>

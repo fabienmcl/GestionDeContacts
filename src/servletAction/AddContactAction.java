@@ -14,13 +14,15 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import actionForm.AddContactValidationForm;
 import domain.Contact;
 import domain.DAOContact;
 import service.ContactService;
 
-public class AddContactAction extends Action {
+public class AddContactAction extends Action {	
 
 	
 	public ActionForward execute(final ActionMapping pMapping,
@@ -28,9 +30,14 @@ public class AddContactAction extends Action {
 			final HttpServletResponse pResponse) {
 		System.out.println("je suis dans addContactAction");
 		
+		
+		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		final ContactService contactService = (ContactService) context.getBean("contactService");
+		
+		
 		final AddContactValidationForm lForm=(AddContactValidationForm)pForm;
 		
-		final ContactService contactService = new ContactService(); 
+		//final ContactService contactService = new ContactService(); 
 		
 		
 		

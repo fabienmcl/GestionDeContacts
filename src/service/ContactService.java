@@ -5,12 +5,22 @@ import java.util.List;
 import domain.Contact;
 import domain.DAOContact;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 public class ContactService {
 	
 	private DAOContact contactDAO;
 	
 	public ContactService(){
-		this.contactDAO = new DAOContact();
+		//this.contactDAO = new DAOContact();
+	}
+	
+	public void setDAOContact(DAOContact contactDAO) {
+		this.contactDAO = contactDAO;
+	}
+	public DAOContact getDAOContact() {
+		return this.contactDAO;
 	}
 	
 	public String addContact(Contact contact){

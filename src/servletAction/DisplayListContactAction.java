@@ -11,8 +11,13 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+
 import domain.Contact;
 import domain.DAOContact;
+import service.ContactService;
 
 public class DisplayListContactAction extends Action{
  
@@ -20,11 +25,11 @@ public class DisplayListContactAction extends Action{
 		HttpServletRequest request,HttpServletResponse response) 
         throws Exception {
 
+
+		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		final ContactService contactService = (ContactService) context.getBean("contactService");
 		
-		
-		List<Contact> listContactsJDBC;
-		final DAOContact lDAOContact = new DAOContact();
-		listContactsJDBC=lDAOContact.getListContact();
+		List<Contact> listContactsJDBC = contactService.getListContact();
 		
 		if(listContactsJDBC.isEmpty()) {
 			// If any exception, return the "error" forward
