@@ -12,8 +12,12 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
 import actionForm.AlterContactValidationForm;
+import domain.Contact;
 import domain.DAOContact;
+import service.ContactService;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class AlterContactAction extends Action {
 
 	
@@ -21,7 +25,10 @@ public class AlterContactAction extends Action {
 			ActionForm pForm, final HttpServletRequest pRequest,
 			final HttpServletResponse pResponse) {
 		
+		
 		System.out.println("je suis dans alterContactAction");
+		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		final ContactService contactService = (ContactService) context.getBean("contactService");
 		
 		final AlterContactValidationForm lForm=(AlterContactValidationForm)pForm;
 		
@@ -31,19 +38,26 @@ public class AlterContactAction extends Action {
 		final String lastName = lForm.getLastName();
 		final String email = lForm.getEmail();
 
+		
+		
+		/*
 		// create a new Contact
 		final DAOContact lDAOContact = new DAOContact();
 		System.out.println("je suis dans alterContactAction step dao");
 		final String lError = lDAOContact.alterContact(id, firstName, lastName, email);
-		System.out.println("je suis dans alterContactAction step lerror");
-		System.out.println(lError);
+		*/
 		
+		final String lError = contactService.alterContact(new Contact(id,firstName,lastName,email));
 		
 		if(lError == null) {
+			System.out.println("je suis dans alterContactAction step sucess");
 			// if no exception is raised,  forward "success"
 			return pMapping.findForward("success");
 		}
 		else {
+			System.out.println("je suis dans alterContactAction step lerror");
+			System.out.println(lError);
+			
 			// If any exception, return the "error" forward
 			return pMapping.findForward("error");
 		}
