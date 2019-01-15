@@ -16,4 +16,6 @@
         <bean name="serviceContact" class="service.ContactService">
 			<property name="cdao" ref="idDaoContact"></property>
 		</bean>-->
+		
+	
 </beans>
