@@ -35,6 +35,7 @@ public class ContactService {
 	}
 	
 	public String removeContact(final long id, final String email){
+		System.out.println("je suis dans contact service");
 		return this.contactDAO.removeContact(id, email);
 	}
 }

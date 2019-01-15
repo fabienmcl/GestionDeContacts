@@ -9,7 +9,7 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">root</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-       
+       	<property name='transaction.auto_close_session'>true</property>
          <!-- fait en sorte qu'Hibernate gere automatiquement la session -->
          <!-- Celle-ci est liée au thread local. -->
         <property name="current_session_context_class">thread</property>

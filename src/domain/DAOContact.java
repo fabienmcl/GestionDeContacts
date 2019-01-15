@@ -31,15 +31,18 @@ public class DAOContact extends DAOHibernate {
 	
 	
 	public String removeContact(final long id, final String email){
+		System.out.println("je suis dans DAOcontact : remove contact");
 		String result = null;
 		Contact contact = getContact(id);
 		super.open();
-		
+		System.out.println("after open");
 		try {
 			//super.getSession().delete(contact);
 			String hql = "delete from Contact_table where ID_CONTACT="+contact.getId()+" ;";
 			super.getSession().createQuery(hql).executeUpdate();
+			System.out.println("after querry");
 			super.close();
+			System.out.println("after close");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
