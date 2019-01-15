@@ -1,95 +1,42 @@
 package domain;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import util.HibernateUtil;
 
 public class DAO {
 	
-	private Connection  context;
-	private DataSource dataSource;
-	private PreparedStatement preparedStatement;
-	private final static String RESOURCE_JDBC = "java:comp/env/jdbc/dsMyDB";
+	private Session session;
+	private Transaction transaction;
 	
 	DAO(){
 		super();
-		context = null;
-		dataSource = getDataSource(); 
-		preparedStatement = null;
-	}
-	
-	
-
-	public Connection getContext() {
-		this.openContext();
-		if (this.context == null){
-				this.openContext();
-		}
-		return context;
-	}
-
-	public void setContext(Connection context) {
-		this.context = context;
-	}
-	private void openContext(){
 		try {
-			this.context = this.dataSource.getConnection();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }
-    
-    private void closeContext() {
-    	try {
-    		if(this.context!=null){
-        		this.context.close();
-        	}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	
-	}
-
-	public DataSource getDataSource() {
-		DataSource ldataSource = null;
-		try {
-			Context lcontext = new InitialContext();
-			ldataSource = (DataSource) lcontext.lookup(RESOURCE_JDBC);
-		} 
-		catch (NamingException e) {
-			e.printStackTrace();
-		}
-		return ldataSource;
-	}
-
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
-
-	public PreparedStatement getPreparedStatement() {
-		return preparedStatement;
-	}
-
-	public void setPreparedStatement(PreparedStatement preparedStatement) {
-		this.preparedStatement = preparedStatement;
+			this.transaction = null;
+			this.session = HibernateUtil.getSessionFactory().getCurrentSession();
+        }catch (Exception e) {
+        	this.session = null;
+            e.printStackTrace();
+        }
 	}
 	
+	public Session getSession(){
+		return this.session;
+	}
+	public void open(){
+		try{
+			this.transaction = this.session.beginTransaction();
+		}catch (Exception e) {
+        	e.printStackTrace();
+        }
+	}
 	public void close(){
-		try {
-			if (this.preparedStatement != null) {
-				this.preparedStatement.close();
-			}
-		}catch (Exception e) { 
-			throw new RuntimeException(e); 
-		}
-		this.closeContext();
+		try{
+			this.transaction.commit();
+		}catch(Exception e) {
+            e.printStackTrace();
+        }
+		this.transaction=null;
 	}
-
+	
 }
