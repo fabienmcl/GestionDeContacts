@@ -21,6 +21,18 @@
           box-sizing: border-box;
 }
 
+.button {
+  font: bold 11px Arial;
+  text-decoration: none;
+  background-color: #EEEEEE;
+  color: #333333;
+  padding: 2px 6px 2px 6px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -130,16 +142,17 @@ body {
 </head>
 
 <body>
-
+<a href="http://localhost:8080/ContactsStruts/" class="button btn btn-primary btn-lg active" role="button" aria-pressed="true">Go to login form</a>
 	<div id="notfound">
 		<div class="notfound">
 			<div class="notfound-404">
 				<h1>Oops!</h1>
 				<h2>500 - The Page can't be found</h2>
 			</div>
-			<a href="/pages/login.jsp">Go TO Homepage</a>
+			
 		</div>
 	</div>
+	
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
