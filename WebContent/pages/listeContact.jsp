@@ -87,7 +87,7 @@ $(document).ready(function() {
     </ul>
     
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span></a></li>
+      <li><a href="http://localhost:8080/ContactsStruts/"><span class="glyphicon glyphicon-log-in"></span></a></li>
     </ul>
   </div>
 </nav>
