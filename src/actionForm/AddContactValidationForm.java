@@ -21,10 +21,21 @@ public class AddContactValidationForm extends ActionForm {
 	  private String city=null;
 	  private String country=null;
 	  private String zip=null;
-	  private String phonenumber=null;
+
+	private String phonenumber=null;
 	  private String phonekind=null;
+	  private String siret=null;
 	  
 
+
+	  
+	public String getSiret() {
+		return siret;
+	}
+
+	public void setSiret(String siret) {
+		this.siret = siret;
+	}
 
 	public String getStreet() {
 		return street;
@@ -152,10 +163,11 @@ public class AddContactValidationForm extends ActionForm {
 		ActionErrors errors = new ActionErrors();
 
 		if( getFirstName()== null || getFirstName().length() < 1 ) {
-			errors.add("first name",new ActionMessage("creation.fn.error.required"));
+			if(!(getSiret().length()>=1))
+				errors.add("first name",new ActionMessage("creation.fn.error.required"));
 		}
 		if( getLastName()== null || getLastName().length() < 1 ) {
-			errors.add("last name",new ActionMessage("creation.ln.error.required"));
+				errors.add("last name",new ActionMessage("creation.ln.error.required"));
 		}
 		if( getEmail() == null || getEmail().length() < 1 || validateEmail(email)==false) {
 			errors.add("email", new ActionMessage("creation.email.error.required"));

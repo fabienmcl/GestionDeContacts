@@ -4,6 +4,7 @@ import java.util.List;
 
 import domain.Contact;
 import domain.DAOContact;
+import domain.Entreprise;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -26,6 +27,11 @@ public class ContactService {
 	public String addContact(Contact contact){
 		return this.contactDAO.addContact(contact);
 	}
+	
+	public String addEntreprise(Entreprise entreprise){
+		return this.contactDAO.addEntreprise(entreprise);
+	}
+	
 	
 	public List<Contact> getListContact(){
 		return this.contactDAO.getListContact();

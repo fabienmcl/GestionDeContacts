@@ -7,6 +7,8 @@
   	 <id name="id" type="long" column="ID_CONTACT" >
    		<generator class="increment"/>
   	 </id>
+  	 
+  	 <discriminator column="entreprise" type="string"></discriminator>
 
      <property name="firstName">
      	<column name="FIRSTNAME" />
@@ -37,5 +39,10 @@
 		<key column="contactId"/>
 		<many-to-many class="ContactGroup" column="groupId" />
 	</set>
+	
+		<subclass name="Entreprise" discriminator-value="entreprise">
+			<property name="numSiret" type="string"></property>
+		</subclass>
+	
   </class>
 </hibernate-mapping>

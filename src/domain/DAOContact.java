@@ -33,6 +33,26 @@ public class DAOContact extends DAOHibernate {
 		return result;
 	}
 	
+	public String addEntreprise(Entreprise entreprise) {
+		String result = null;
+		super.open();
+		
+		try {
+			
+			super.getSession().save(entreprise.getAddress());
+			for(PhoneNumber  phone : entreprise.getPhones()) {
+				super.getSession().save(phone);
+			}
+			super.getSession().save(entreprise);
+			//contact.setFirstName("Robin");
+			super.close();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+
+		}
+		return result;
+	}
+	
 	
 	public String removeContact(final long id, final String email){
 		System.out.println("je suis dans DAOcontact : remove contact");

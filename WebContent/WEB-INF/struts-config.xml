@@ -36,6 +36,19 @@
 			<forward name="error" path="/pages/creationContact.jsp" />
 	</action>
 	
+		<!-- ========== Partie creation entreprise  =========================== -->
+	<action path="/creationEntreprise" forward="/pages/creationEntreprise.jsp" />
+
+	<action path="/AddContact" 
+				type="servletAction.AddContactAction"
+				name="AddContactValidationForm" scope="request" 
+				
+				input="/pages/creationEntreprise.jsp">
+				
+			<forward name="success" path="/listeContact.do" />
+			<forward name="error" path="/pages/creationEntreprise.jsp" />
+	</action>
+	
 	<!-- ========== Partie suppression contact  =========================== -->
 	<action path="/suppressionContact" forward="/pages/suppressionContact.jsp" />
 
