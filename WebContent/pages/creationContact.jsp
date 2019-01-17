@@ -85,7 +85,7 @@ $(document).ready(function() {
       <a class="navbar-brand" href="#">Gestionnaire de Contact</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="listeContact.do">Home</a></li>
+      <li><a href="pages/listeContact.do">Home</a></li>
       <li  class="active" ><a HREF="#"><bean:message key="link.add.contact"/></a></li>
     </ul>
     
