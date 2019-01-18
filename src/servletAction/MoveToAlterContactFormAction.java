@@ -14,11 +14,14 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import actionForm.AddContactValidationForm;
 import actionForm.MoveContactValidationForm;
 import domain.Contact;
 import domain.DAOContact;
+import service.ContactService;
 
 public class MoveToAlterContactFormAction extends Action {
 
@@ -29,6 +32,9 @@ public class MoveToAlterContactFormAction extends Action {
 		System.out.println("##########################################");
 		System.out.println("Step 1: Je suis dans moveToAlter");
 		
+		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		final ContactService contactService = (ContactService) context.getBean("contactService");
+		
 		final MoveContactValidationForm lForm=(MoveContactValidationForm)pForm;
 		System.out.println("Step 2: moveToAlter formulaie ok");
 		final long id = lForm.getId();
@@ -36,6 +42,9 @@ public class MoveToAlterContactFormAction extends Action {
 		final String firstName = lForm.getFirstName();
 		final String lastName = lForm.getLastName();
 		final String email = lForm.getEmail();
+		
+		Contact c1 = contactService.getDAOContact().getContact(id);
+		//Address add = contactService.getDAOContact().getAddress()
 		
 		Contact c = new Contact(id,firstName,lastName,email);
 		pRequest.setAttribute("c",c);

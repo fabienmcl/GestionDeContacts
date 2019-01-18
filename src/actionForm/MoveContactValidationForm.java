@@ -14,7 +14,18 @@ public class MoveContactValidationForm extends ActionForm {
 	private String firstName=null;
 	private String lastName=null;
 	private String email=null;
+	private String siret=null;
+	
+	
 
+
+	public String getSiret() {
+		return siret;
+	}
+
+	public void setSiret(String siret) {
+		this.siret = siret;
+	}
 
 	/**
 	 * @return Email
@@ -86,7 +97,7 @@ public class MoveContactValidationForm extends ActionForm {
 		ActionErrors errors = new ActionErrors();
 
 		if( getFirstName()== null || getFirstName().length() < 1 ) {
-			errors.add("first name",new ActionMessage("move.fn.error.required"));
+			//errors.add("first name",new ActionMessage("move.fn.error.required"));
 		}
 		if( getLastName()== null || getLastName().length() < 1 ) {
 			errors.add("last name",new ActionMessage("move.ln.error.required"));

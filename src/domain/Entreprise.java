@@ -14,10 +14,10 @@ public class Entreprise  extends Contact{
 		this.numSiret = numSiret;
 	}
 
-	public Entreprise(String numsiret2, String firstName, String email, Address add) {
+	public Entreprise(String numsiret2, String lastName, String email, Address add) {
 		this.numSiret = numsiret2;
-		super.setFirstName(firstName);
-		super.setLastName("");
+		super.setFirstName("");
+		super.setLastName(lastName);
 		super.setEmail(email);
 		super.setAddress(add);
 	}
