@@ -24,6 +24,7 @@ import domain.PhoneNumber;
 import actionForm.AddContactValidationForm;
 import domain.Contact;
 import domain.DAOContact;
+import domain.Entreprise;
 import service.ContactService;
 
 public class AddContactAction extends Action {	
@@ -56,9 +57,18 @@ public class AddContactAction extends Action {
 		  final String zip=lForm.getZip();
 		  final String phonenumber=lForm.getPhonenumber();
 		  final String phonekind=lForm.getPhonekind();
+		  final String numsiret=lForm.getSiret();
+		  
 		  
 		  Address add = new Address(street, city, zip, country);
-		  Contact contact = new Contact(firstName, lastName, email, add);
+		  Contact contact;
+		  
+		  if(!(numsiret==null) && firstName.isEmpty())
+			  contact = new Entreprise(numsiret, lastName, email, add);
+		  else
+			  contact = new Contact(firstName, lastName, email, add);
+		  
+		  
 		  Set<PhoneNumber> phones = new HashSet<PhoneNumber>();
 		  PhoneNumber phone = new PhoneNumber(phonekind,phonenumber);
 		  phone.setContact(contact);
@@ -70,7 +80,15 @@ public class AddContactAction extends Action {
 		//final DAOContact lDAOContact = new DAOContact();
 		System.out.println("je suis dans addContactAction step dao");
 		//final String lError = lDAOContact.addContact(id, firstName, lastName, email);
-		final String lError =contactService.addContact(contact);
+		
+		final String lError;
+		
+		if(!(numsiret==null) && firstName.isEmpty())
+			lError =contactService.addEntreprise((Entreprise) contact);
+		else
+			lError =contactService.addContact(contact);
+		
+		
 		System.out.println("je suis dans addContactAction step lerror");
 		System.out.println(lError);
 		

@@ -79,6 +79,7 @@ $(document).ready(function() {
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Home</a></li>
       <li><a HREF="creationContact.do"><bean:message key="link.add.contact"/></a></li>
+      <li><a HREF="creationEntreprise.do"><bean:message key="link.add.entreprise"/></a></li>
      <li><a HREF="creationContact.do">Injecter base de test</a></li>
      <!-- 
      deux conatcts rempli : 2 tels, une adress, 2  group de contact

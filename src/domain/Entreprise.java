@@ -2,22 +2,31 @@ package domain;
 
 
 public class Entreprise  extends Contact{
-	int NumSiret;
+	String numSiret;
 	
 	public Entreprise() {
 		super();
 	}
 	
 
-	public Entreprise(int numSiret) {
+	public Entreprise(String numSiret) {
 		super();
-		NumSiret = numSiret;
+		this.numSiret = numSiret;
 	}
 
-	public int getNumSiret() {
-		return NumSiret;
+	public Entreprise(String numsiret2, String firstName, String email, Address add) {
+		this.numSiret = numsiret2;
+		super.setFirstName(firstName);
+		super.setLastName("");
+		super.setEmail(email);
+		super.setAddress(add);
 	}
-	public void setNumSiret(int numSiret) {
-		NumSiret = numSiret;
+
+
+	public String getNumSiret() {
+		return numSiret;
+	}
+	public void setNumSiret(String numSiret) {
+		this.numSiret = numSiret;
 	}
 }
