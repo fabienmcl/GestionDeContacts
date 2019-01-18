@@ -11,6 +11,7 @@ public class Contact {
 	private Address address;
 	private Set<PhoneNumber> phones = new HashSet<PhoneNumber>();
 	private Set<ContactGroup> books = new HashSet<ContactGroup>();
+	private int version;
 
 	public Contact() {
 		super();
@@ -30,6 +31,32 @@ public class Contact {
 		this.lastName = lastName;
 		this.email = email;
 		this.address = address;
+	}
+	
+	public Contact(String firstName, String lastName, String email, Address address, int version) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.address = address;
+		this.version = version;
+	}
+	
+	public Contact(String firstName, String lastName, String email, int version) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.version = version;
+	}
+	
+	public Contact(long id, String firstName, String lastName, String email, int version) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.version = version;
 	}
 
 
@@ -124,6 +151,20 @@ public class Contact {
 		this.phones = phones;
 		this.books = books;
 	}
+	
+	
+
+	public int getVersion() {
+		return version;
+	}
+
+
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+
 
 	public long getId() {
 		return id;

@@ -37,7 +37,7 @@ public class ContactService {
 		return this.contactDAO.getListContact();
 	}
 	public String alterContact(Contact contact){
-		return this.contactDAO.alterContact(contact.getId(), contact.getFirstName(), contact.getLastName(), contact.getEmail());
+		return this.contactDAO.alterContact(contact.getId(), contact.getFirstName(), contact.getLastName(), contact.getEmail(), contact.getVersion());
 	}
 	
 	public String removeContact(final long id, final String email){

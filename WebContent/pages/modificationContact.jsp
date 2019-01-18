@@ -121,7 +121,72 @@ button {
 						maxlength="30" value="${emailContact}" /></td>
 			</tr>
 			
-					
+						
+          <td align="center" colspan="2">
+		<p />
+		<font size="4"><bean:message key="add.page.address"/></font>
+ 	</tr>
+ 	
+ 	     <tr>
+          <td align="right">
+            <bean:message key="add.page.street"/> 
+          </td>
+          <td align="left">
+            <html:text property="street" size="30" maxlength="50"/>
+          </td>
+        </tr>
+        
+        <tr>
+          <td align="right">
+            <bean:message key="add.page.city"/> 
+          </td>
+          <td align="left">
+            <html:text property="city" size="30" maxlength="50"/>
+          </td>
+        </tr>
+        
+        <tr>
+          <td align="right">
+            <bean:message key="add.page.zip"/> 
+          </td>
+          <td align="left">
+            <html:text property="zip" size="30" maxlength="50"/>
+          </td>
+        </tr>
+        
+        <tr>
+          <td align="right">
+            <bean:message key="add.page.country"/> 
+          </td>
+          <td align="left">
+            <html:text property="country" size="30" maxlength="50"/>
+          </td>
+        </tr>
+        
+     <tr>
+
+          <td align="center" colspan="2">
+		<p />
+		<font size="4"><bean:message key="add.page.phone"/></font>
+ 	</tr>
+ 	
+ 	        <tr>
+          <td align="right">
+            <bean:message key="add.page.phonenumber"/> 
+          </td>
+          <td align="left">
+            <html:text property="phonenumber" size="30" maxlength="50"/>
+          </td>
+        </tr>
+        
+         	        <tr>
+          <td align="right">
+            <bean:message key="add.page.phonekind"/> 
+          </td>
+          <td align="left">
+            <html:text property="phonekind" size="30" maxlength="50"/>
+          </td>
+        </tr>
 		
 			
 			<tr>

@@ -19,9 +19,66 @@ public class AlterContactValidationForm extends ActionForm {
 	private String firstName=null;
 	private String lastName=null;
 	private String email=null;
-	private String siret=null;
+	  private String street=null;
+	  private String city=null;
+	  private String country=null;
+	  private String zip=null;
+
+	private String phonenumber=null;
+	  private String phonekind=null;
+	  private String siret=null;
+	  
+	  
 	
 
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getZip() {
+		return zip;
+	}
+
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+
+	public String getPhonenumber() {
+		return phonenumber;
+	}
+
+	public void setPhonenumber(String phonenumber) {
+		this.phonenumber = phonenumber;
+	}
+
+	public String getPhonekind() {
+		return phonekind;
+	}
+
+	public void setPhonekind(String phonekind) {
+		this.phonekind = phonekind;
+	}
 
 	public String getSiret() {
 		return siret;

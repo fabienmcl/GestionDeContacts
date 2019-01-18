@@ -96,7 +96,21 @@ public class DAOContact extends DAOHibernate {
 		return contact;
 	}
 	
-	public String alterContact(final long id, final String firstName, final String lastName, final String email) {
+	/*public Address getAddress(final long id){
+		super.open();
+		Address add = (Address) super.getSession().get(Address.class, id);
+		super.close();
+		return add;
+	}
+	
+	public PhoneNumber getPhone(final long id){
+		super.open();
+		PhoneNumber pn = (PhoneNumber) super.getSession().get(PhoneNumber.class, id);
+		super.close();
+		return pn;
+	}*/
+	
+	public String alterContact(final long id, final String firstName, final String lastName, final String email, final int version) {
 	
 		String result = null;
 		/*
@@ -104,7 +118,7 @@ public class DAOContact extends DAOHibernate {
 		contact.setFirstName(firstName);
 		contact.setLastName(lastName);
 		contact.setEmail(email);*/
-		Contact contact = new Contact(id, firstName, lastName, email);
+		Contact contact = new Contact(id, firstName, lastName, email, version);
 		super.open();
 		try {
 			super.getSession().update(contact);
