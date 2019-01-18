@@ -107,6 +107,7 @@ $(document).ready(function() {
   <thead > 
     <tr>
       <th>#</th>
+      <th class="col-md-5 col-xs-5">Status</th>
       <th class="col-md-5 col-xs-5">Lastname</th>
       <th class="col-md-4 col-xs-4">FirstName</th>
       <th class="col-md-3 col-xs-3">email</th>
@@ -122,6 +123,7 @@ $(document).ready(function() {
 			<logic:iterate name="listContactsJDBC" id="itemJDBC">
 		        <tr class="clickable-row">
 		        	<td><bean:write name="itemJDBC" property="id"/></td>
+		        	<td>${itemJDBC.firstName==""?"entreprise":"contact"}</td>
 		            <td><bean:write name="itemJDBC" property="lastName"/></td>
 		            <td><bean:write name="itemJDBC" property="firstName"/></td>
 		            <td><bean:write name="itemJDBC" property="email"/></td>
