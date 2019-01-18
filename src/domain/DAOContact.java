@@ -63,24 +63,7 @@ public class DAOContact {
 		return result;
 	}
 	
-	public Contact getFullContact(final long id) {
-		super.open();
-		Contact contact = (Contact) super.getSession().get(Contact.class, id);
-		Address add = new Address(contact.getAddress().getStreet(), contact.getAddress().getCity(), contact.getAddress().getZip(), contact.getAddress().getCountry());
-		Set<PhoneNumber> phones = new HashSet<PhoneNumber>();
 
-		for(PhoneNumber phone : contact.getPhones()) {
-			phones.add(new PhoneNumber(phone.getPhoneKind(), phone.getPhoneNumber()));
-		}
-
-		Contact ct = new Contact();
-
-		ct.setAddress(add);
-		ct.setPhones(phones);
-		//System.out.println(contact.getAddress().getStreet());
-		super.close();
-		return ct;
-	}
 	public String removeContact(final long id, final String email){
 		System.out.println("je suis dans DAOcontact : remove contact");
 		String result = null;
