@@ -154,6 +154,21 @@ public class Contact {
 	
 	
 
+	public Contact(long id, String firstName, String lastName, String email, int version, Address address, Set<PhoneNumber> phones,
+			Set<ContactGroup> books) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.address = address;
+		this.phones = phones;
+		this.books = books;
+		this.version = version;
+	}
+
+
+
 	public int getVersion() {
 		return version;
 	}

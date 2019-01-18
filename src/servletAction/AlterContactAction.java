@@ -47,7 +47,7 @@ public class AlterContactAction extends Action {
 		final String lError = lDAOContact.alterContact(id, firstName, lastName, email);
 		*/
 		Contact c = contactService.getDAOContact().getContact(id);
-		final String lError = contactService.alterContact(new Contact(id,firstName,lastName,email, c.getVersion()));
+		final String lError = contactService.alterContact(new Contact(id,firstName,lastName,email, c.getVersion(), c.getAddress(), c.getPhones(), c.getBooks()));
 		
 		if(lError == null) {
 			System.out.println("je suis dans alterContactAction step sucess");

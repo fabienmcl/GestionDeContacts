@@ -28,7 +28,7 @@
 		<one-to-many class="PhoneNumber" />
 	 </set>
 	 <!-- 0 ou  1 adrress-->
-	 <many-to-one name="address" column="ID_ADRESS" unique="true" not-null="false"/>
+	 <many-to-one name="address" column="ID_ADRESS" unique="true" not-null="false" cascade="all"/>
 	 <!-- Un contact appartient à 0, 1 ou n groupes -->
 	 <!-- 
 	<set name="books" table="ContactGroup_table" cascade="all" optimistic-lock="false" lazy="false">

@@ -74,6 +74,12 @@ button {
 	<bean:define id="firstNameContact" name='c' property='firstName'/>
 	<bean:define id="lastNameContact" name='c' property='lastName'/>
 	<bean:define id="emailContact" name='c' property='email'/>
+	<bean:define id="streetContact" name='address' property='street'/>
+	<bean:define id="cityContact" name='address' property='city'/>
+	<bean:define id="zipContact" name='address' property='zip'/>
+	<bean:define id="countryContact" name='address' property='country'/>
+	<bean:define id="phonenumberContact" name='phone' property='phoneNumber'/>
+	<bean:define id="phonekindContact" name='phone' property='phoneKind'/>
 	
 	<html:form action="/AlterContact">
 		<html:errors />
@@ -132,7 +138,7 @@ button {
             <bean:message key="add.page.street"/> 
           </td>
           <td align="left">
-            <html:text property="street" size="30" maxlength="50"/>
+            <html:text property="street" size="30" maxlength="50" value="${streetContact}"/>
           </td>
         </tr>
         
@@ -141,7 +147,7 @@ button {
             <bean:message key="add.page.city"/> 
           </td>
           <td align="left">
-            <html:text property="city" size="30" maxlength="50"/>
+            <html:text property="city" size="30" maxlength="50" value="${cityContact}" />
           </td>
         </tr>
         
@@ -150,7 +156,7 @@ button {
             <bean:message key="add.page.zip"/> 
           </td>
           <td align="left">
-            <html:text property="zip" size="30" maxlength="50"/>
+            <html:text property="zip" size="30" maxlength="50" value="${zipContact}"/>
           </td>
         </tr>
         
@@ -159,7 +165,7 @@ button {
             <bean:message key="add.page.country"/> 
           </td>
           <td align="left">
-            <html:text property="country" size="30" maxlength="50"/>
+            <html:text property="country" size="30" maxlength="50" value="${countryContact}"/>
           </td>
         </tr>
         
@@ -175,7 +181,7 @@ button {
             <bean:message key="add.page.phonenumber"/> 
           </td>
           <td align="left">
-            <html:text property="phonenumber" size="30" maxlength="50"/>
+            <html:text property="phonenumber" size="30" maxlength="50" value="${phonenumberContact}"/>
           </td>
         </tr>
         
@@ -184,7 +190,7 @@ button {
             <bean:message key="add.page.phonekind"/> 
           </td>
           <td align="left">
-            <html:text property="phonekind" size="30" maxlength="50"/>
+            <html:text property="phonekind" size="30" maxlength="50" value="${phonekindContact}"/>
           </td>
         </tr>
 		

@@ -1,7 +1,9 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Query;
 import org.springframework.stereotype.Component;
@@ -92,9 +94,31 @@ public class DAOContact extends DAOHibernate {
 	public Contact getContact(final long id){
 		super.open();
 		Contact contact = (Contact) super.getSession().get(Contact.class, id);
+		//System.out.println(contact.getAddress().getStreet());
 		super.close();
 		return contact;
 	}
+	
+	public Contact getFullContact(final long id) {
+		super.open();
+		Contact contact = (Contact) super.getSession().get(Contact.class, id);
+		Address add = new Address(contact.getAddress().getStreet(), contact.getAddress().getCity(), contact.getAddress().getZip(), contact.getAddress().getCountry());
+		Set<PhoneNumber> phones = new HashSet<PhoneNumber>();
+		
+		for(PhoneNumber phone : contact.getPhones()) {
+			phones.add(new PhoneNumber(phone.getPhoneKind(), phone.getPhoneNumber()));
+		}
+		
+		Contact ct = new Contact();
+		
+		ct.setAddress(add);
+		ct.setPhones(phones);
+		//System.out.println(contact.getAddress().getStreet());
+		super.close();
+		return ct;
+	}
+	
+	
 	
 	/*public Address getAddress(final long id){
 		super.open();
@@ -110,7 +134,7 @@ public class DAOContact extends DAOHibernate {
 		return pn;
 	}*/
 	
-	public String alterContact(final long id, final String firstName, final String lastName, final String email, final int version) {
+	public String alterContact(Contact contact) {
 	
 		String result = null;
 		/*
@@ -118,10 +142,11 @@ public class DAOContact extends DAOHibernate {
 		contact.setFirstName(firstName);
 		contact.setLastName(lastName);
 		contact.setEmail(email);*/
-		Contact contact = new Contact(id, firstName, lastName, email, version);
+		//Contact contact = new Contact(id, firstName, lastName, email, version);
+		//Contact contact = (Contact) super.getSession().get(Contact.class, id);
 		super.open();
 		try {
-			super.getSession().update(contact);
+			super.getSession().update(contact); //pb
 			super.close();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

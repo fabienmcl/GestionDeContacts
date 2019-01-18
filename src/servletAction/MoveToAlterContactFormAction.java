@@ -21,6 +21,7 @@ import actionForm.AddContactValidationForm;
 import actionForm.MoveContactValidationForm;
 import domain.Contact;
 import domain.DAOContact;
+import domain.PhoneNumber;
 import service.ContactService;
 
 public class MoveToAlterContactFormAction extends Action {
@@ -43,11 +44,22 @@ public class MoveToAlterContactFormAction extends Action {
 		final String lastName = lForm.getLastName();
 		final String email = lForm.getEmail();
 		
-		Contact c1 = contactService.getDAOContact().getContact(id);
+		Contact c1 = contactService.getDAOContact().getFullContact(id);
+		System.out.println(c1.getAddress().getStreet());
 		//Address add = contactService.getDAOContact().getAddress()
 		
 		Contact c = new Contact(id,firstName,lastName,email);
 		pRequest.setAttribute("c",c);
+		pRequest.setAttribute("address", c1.getAddress());
+		PhoneNumber pn = c1.getPhones().iterator().next();
+		pRequest.setAttribute("phone", pn);
+		/*pRequest.setAttribute("street", c1.getAddress().getStreet());
+		pRequest.setAttribute("city", c1.getAddress().getCity());
+		pRequest.setAttribute("zip", c1.getAddress().getZip());
+		pRequest.setAttribute("country", c1.getAddress().getCountry());
+		PhoneNumber pn = c1.getPhones().iterator().next();
+		pRequest.setAttribute("phonenumber", pn.getPhoneNumber());
+		pRequest.setAttribute("phonekind", pn.getPhoneKind());*/
 		return pMapping.findForward("success");
 		
 	}
