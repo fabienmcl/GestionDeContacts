@@ -132,14 +132,14 @@ public class DAOContact extends DAOHibernate {
 			List<Contact> listResultQuery = (List<Contact>) super.getSession().createCriteria(Contact.class).list();//query.list();
 			for (Contact contact : listResultQuery) {
 				
-				if(contact.getFirstName()==null || contact.getFirstName().isEmpty()) {
+				if(contact.getLastName()==null || contact.getLastName().isEmpty()) {
 					Entreprise ent = (Entreprise) contact;
-					Entreprise c = new Entreprise(ent.getNumSiret(), ent.getLastName(), ent.getEmail(), ent.getAddress());
+					Entreprise c = new Entreprise(ent.getNumSiret(), ent.getFirstName(), ent.getEmail(), ent.getAddress());
 					c.setId(contact.getId());
 					listContacts.add(c);
 				}
 				else {
-					Contact c = new Contact(contact.getLastName(), contact.getFirstName(), contact.getEmail());
+					Contact c = new Contact(contact.getFirstName(), contact.getLastName(), contact.getEmail());
 					c.setId(contact.getId());
 					listContacts.add(c);
 				}

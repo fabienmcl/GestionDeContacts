@@ -120,6 +120,10 @@ button {
 				<td align="left"><html:text property="email" size="30"
 						maxlength="30" value="${emailContact}" /></td>
 			</tr>
+			
+					
+		
+			
 			<tr>
 				<td align="right"><html:submit><bean:message key="form.validate" /></html:submit></td>
 			</tr>
