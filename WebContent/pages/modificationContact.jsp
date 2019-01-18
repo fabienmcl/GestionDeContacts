@@ -89,11 +89,24 @@ button {
 				<td align="left"><html:text property="id" size="30"
 						maxlength="30" value="${idContact}"/></td>
 			</tr>
-			<tr>
-				<td align="right"><bean:message key="form.firstname" /></td>
-				<td align="left"><html:text property="firstName" size="30"
+			
+
+			
+			
+			    <% String s = request.getParameter("firstName"); %>
+    <%=s %>
+    <% if (s==null || s.isEmpty()) { %> 
+
+
+   <% } else { %>
+          						<tr>
+						<td align="right"><bean:message key="form.firstname" /></td>
+						<td align="left"><html:text property="firstName" size="30"
 						maxlength="30" value="${firstNameContact}" /></td>
-			</tr>
+					</tr>
+    <% } %>
+			
+		
 			
 			<tr> 
 				<td align="right"><bean:message key="form.lastname" /></td>

@@ -19,7 +19,17 @@ public class AlterContactValidationForm extends ActionForm {
 	private String firstName=null;
 	private String lastName=null;
 	private String email=null;
+	private String siret=null;
+	
 
+
+	public String getSiret() {
+		return siret;
+	}
+
+	public void setSiret(String siret) {
+		this.siret = siret;
+	}
 
 	/**
 	 * @return Email
@@ -82,6 +92,7 @@ public class AlterContactValidationForm extends ActionForm {
 		this.firstName=null;
 		this.lastName=null;
 		this.email=null;
+		this.siret=null;
 	}
 	public static final Pattern VALID_EMAIL_ADDRESS_REGEX = 
 		    Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
@@ -97,7 +108,7 @@ public class AlterContactValidationForm extends ActionForm {
 		ActionErrors errors = new ActionErrors();
 
 		if( getFirstName()== null || getFirstName().length() < 1 ) {
-			errors.add("first name",new ActionMessage("alter.fn.error.required"));
+			//errors.add("first name",new ActionMessage("alter.fn.error.required"));
 		}
 		if( getLastName()== null || getLastName().length() < 1 ) {
 			errors.add("last name",new ActionMessage("alter.ln.error.required"));
