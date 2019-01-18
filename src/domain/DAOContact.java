@@ -23,17 +23,17 @@ public class DAOContact {
 	}
 	public String addContact(Contact contact) {
 		String result = null;
-		super.open();
+		//super.open();
 		
 		try {
 			
-			super.getSession().save(contact.getAddress());
+			this.sessionFactory.getCurrentSession().save(contact.getAddress());
 			for(PhoneNumber  phone : contact.getPhones()) {
-				super.getSession().save(phone);
+				this.sessionFactory.getCurrentSession().save(phone);
 			}
-			super.getSession().save(contact);
+			this.sessionFactory.getCurrentSession().save(contact);
 			//contact.setFirstName("Robin");
-			super.close();
+			//super.close();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 
@@ -43,17 +43,17 @@ public class DAOContact {
 	
 	public String addEntreprise(Entreprise entreprise) {
 		String result = null;
-		super.open();
+		//super.open();
 		
 		try {
 			
-			super.getSession().save(entreprise.getAddress());
+			this.sessionFactory.getCurrentSession().save(entreprise.getAddress());
 			for(PhoneNumber  phone : entreprise.getPhones()) {
-				super.getSession().save(phone);
+				this.sessionFactory.getCurrentSession().save(phone);
 			}
-			super.getSession().save(entreprise);
+			this.sessionFactory.getCurrentSession().save(entreprise);
 			//contact.setFirstName("Robin");
-			super.close();
+			//super.close();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 
