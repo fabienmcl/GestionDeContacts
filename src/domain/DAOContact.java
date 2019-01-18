@@ -25,17 +25,17 @@ public class DAOContact {
 	}
 	public String addContact(Contact contact) {
 		String result = null;
-		super.open();
+		//super.open();
 		
 		try {
 			
-			super.getSession().save(contact.getAddress());
+			this.sessionFactory.getCurrentSession().save(contact.getAddress());
 			for(PhoneNumber  phone : contact.getPhones()) {
-				super.getSession().save(phone);
+				this.sessionFactory.getCurrentSession().save(phone);
 			}
-			super.getSession().save(contact);
+			this.sessionFactory.getCurrentSession().save(contact);
 			//contact.setFirstName("Robin");
-			super.close();
+			//super.close();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 
@@ -45,17 +45,17 @@ public class DAOContact {
 	
 	public String addEntreprise(Entreprise entreprise) {
 		String result = null;
-		super.open();
+		//super.open();
 		
 		try {
 			
-			super.getSession().save(entreprise.getAddress());
+			this.sessionFactory.getCurrentSession().save(entreprise.getAddress());
 			for(PhoneNumber  phone : entreprise.getPhones()) {
-				super.getSession().save(phone);
+				this.sessionFactory.getCurrentSession().save(phone);
 			}
-			super.getSession().save(entreprise);
+			this.sessionFactory.getCurrentSession().save(entreprise);
 			//contact.setFirstName("Robin");
-			super.close();
+			//super.close();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 
@@ -63,39 +63,34 @@ public class DAOContact {
 		return result;
 	}
 	
-	
+	public Contact getFullContact(final long id) {
+		super.open();
+		Contact contact = (Contact) super.getSession().get(Contact.class, id);
+		Address add = new Address(contact.getAddress().getStreet(), contact.getAddress().getCity(), contact.getAddress().getZip(), contact.getAddress().getCountry());
+		Set<PhoneNumber> phones = new HashSet<PhoneNumber>();
+
+		for(PhoneNumber phone : contact.getPhones()) {
+			phones.add(new PhoneNumber(phone.getPhoneKind(), phone.getPhoneNumber()));
+		}
+
+		Contact ct = new Contact();
+
+		ct.setAddress(add);
+		ct.setPhones(phones);
+		//System.out.println(contact.getAddress().getStreet());
+		super.close();
+		return ct;
+	}
 	public String removeContact(final long id, final String email){
 		System.out.println("je suis dans DAOcontact : remove contact");
 		String result = null;
-		//Contact contact = getContact(id);
-		super.open();
-		Contact contact = (Contact) super.getSession().get(Contact.class, id);
-		
-		try {
-			//super.getSession().delete(contact);
-			
-			for(PhoneNumber p : contact.getPhones()) {
-				//String hql = "delete from phonenumber_table where phonenumberId="+p.getId();
-				//super.getSession().createQuery(hql).executeUpdate();
-				Query query=getSession().createQuery("delete from PhoneNumber where id=:id");
-				query.setLong("id", p.getId());
-				query.executeUpdate();
-			}
-			
-			Query query1=getSession().createQuery("delete from Contact where id=:id");
-			query1.setLong("id", id);
-			
-			//String hql = "delete from Contact_table where ID_CONTACT="+contact.getId()+" ;";
-			//super.getSession().createQuery(hql).executeUpdate();
-			
-			int deletedRows=query1.executeUpdate();
-			//String hql = "delete from Contact_table where ID_CONTACT="+contact.getId()+" ;";
-			//super.getSession().createQuery(hql).executeUpdate();
-			super.close();
-			System.out.println("after close");
-		} catch (Exception e) {
+		Contact contact = this.getContact(id);
+		try{
+			this.sessionFactory.getCurrentSession().delete(contact);
+		}catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		
 		return result;
 	}
 	
