@@ -5,16 +5,24 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 
-public class DAOContact extends DAOHibernate {
+public class DAOContact {
 	
+	private SessionFactory sessionFactory;
 	
-	public DAOContact() {
+	/*public DAOContact() {
         super();
-    }
+    }*/
+	public DAOContact(SessionFactory sessionFactory){
+		this.sessionFactory=sessionFactory;
+	}
 	public String addContact(Contact contact) {
 		String result = null;
 		super.open();
@@ -92,62 +100,21 @@ public class DAOContact extends DAOHibernate {
 	}
 	
 	public Contact getContact(final long id){
-		super.open();
-		Contact contact = (Contact) super.getSession().get(Contact.class, id);
-		//System.out.println(contact.getAddress().getStreet());
-		super.close();
+		Contact contact=null;
+		try{
+			contact = (Contact) this.sessionFactory.getCurrentSession().get(Contact.class, id);
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
 		return contact;
 	}
-	
-	public Contact getFullContact(final long id) {
-		super.open();
-		Contact contact = (Contact) super.getSession().get(Contact.class, id);
-		Address add = new Address(contact.getAddress().getStreet(), contact.getAddress().getCity(), contact.getAddress().getZip(), contact.getAddress().getCountry());
-		Set<PhoneNumber> phones = new HashSet<PhoneNumber>();
-		
-		for(PhoneNumber phone : contact.getPhones()) {
-			phones.add(new PhoneNumber(phone.getPhoneKind(), phone.getPhoneNumber()));
-		}
-		
-		Contact ct = new Contact();
-		
-		ct.setAddress(add);
-		ct.setPhones(phones);
-		//System.out.println(contact.getAddress().getStreet());
-		super.close();
-		return ct;
-	}
-	
-	
-	
-	/*public Address getAddress(final long id){
-		super.open();
-		Address add = (Address) super.getSession().get(Address.class, id);
-		super.close();
-		return add;
-	}
-	
-	public PhoneNumber getPhone(final long id){
-		super.open();
-		PhoneNumber pn = (PhoneNumber) super.getSession().get(PhoneNumber.class, id);
-		super.close();
-		return pn;
-	}*/
 	
 	public String alterContact(Contact contact) {
 	
 		String result = null;
-		/*
-		Contact contact = getContact(id);
-		contact.setFirstName(firstName);
-		contact.setLastName(lastName);
-		contact.setEmail(email);*/
-		//Contact contact = new Contact(id, firstName, lastName, email, version);
-		//Contact contact = (Contact) super.getSession().get(Contact.class, id);
-		super.open();
 		try {
-			super.getSession().update(contact); //pb
-			super.close();
+			this.sessionFactory.getCurrentSession().saveOrUpdate(contact);
+			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 
@@ -155,44 +122,20 @@ public class DAOContact extends DAOHibernate {
 		return result;
 	}
 	
-	
+	@SuppressWarnings("unchecked")
+	@Transactional
 	public List<Contact> getListContact() {
 		List<Contact> listContacts = new ArrayList<Contact>();
-		super.open();
 		try {
+			List listResultQuery = this.sessionFactory.getCurrentSession().createCriteria(Contact.class).list();
+			for (int i=0; i < listResultQuery.size(); i++) {
+				listContacts.add((Contact) listResultQuery.get(i));
+			}
 
-			StringBuilder stringBuilder = new StringBuilder();
-			stringBuilder.append("SELECT * FROM  Contact_Table");
-
-			//Query query = super.getSession().createQuery(stringBuilder.toString());
-			
-
-			@SuppressWarnings("unchecked")
-			List<Contact> listResultQuery = (List<Contact>) super.getSession().createCriteria(Contact.class).list();//query.list();
-			for (Contact contact : listResultQuery) {
-				
-				if(contact.getLastName()==null || contact.getLastName().isEmpty()) {
-					Entreprise ent = (Entreprise) contact;
-					Entreprise c = new Entreprise(ent.getNumSiret(), ent.getFirstName(), ent.getEmail(), ent.getAddress());
-					c.setId(contact.getId());
-					listContacts.add(c);
-				}
-				else {
-					Contact c = new Contact(contact.getFirstName(), contact.getLastName(), contact.getEmail());
-					c.setId(contact.getId());
-					listContacts.add(c);
-				}
-				
-
-			}	
-
-			super.close();
+			//super.close();
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		/*if(listContacts.isEmpty()==true){
-			listContacts.add(new Contact());
-		}*/
 		return listContacts;
 	}
 	

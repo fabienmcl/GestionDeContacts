@@ -8,26 +8,40 @@
         <property name="hibernate.connection.url">jdbc:mysql://localhost/pwdb</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">root</property>
+        <property name="hibernate.connection.autocommit">false</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
        	<property name='transaction.auto_close_session'>true</property>
          <!-- fait en sorte qu'Hibernate gere automatiquement la session -->
          <!-- Celle-ci est liée au thread local. -->
-        <property name="current_session_context_class">thread</property>
+        
+
+		<!-- ici on configure le comportement lors du lancement d'hibernate -->
+		<!-- valeur = update i..e si les tables de la base n'existent pas elles 
+			sont crees, sinon elles sont MAJ, la valeur =create i.e. creation à chaque 
+			lancement -->
+		<property name="hbm2ddl.auto">update</property>
+
+		<!-- Le SQL généré est affiché sur la console -->
+		<property name="hibernate.show_sql">true</property>
+
+		<!-- Pretty format le SQL généré -->
+		<property name="hibernate.format_sql">true</property>
+        <property name="use_sql_comments">true</property>
+        
+        <!-- for jdbc transaction -->
+ 		<property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+        
         
         <!-- cache de second niveau -->
-       <!-- 
+     	<!-- 
 		<property name="cache.provider_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
-		<property name="cache.use_second_level_cache">true</property>
+		<property name="hibernate.cache.region.factory_class">net.sf.ehcache.hibernate.EhCacheRegionFactory</property>
+     	<property name="cache.provider_class"> org.hibernate.cache.EhCacheProvider</property>
+     	<property name="cache.use_second_level_cache">true</property>
 		<property name="hibernate.cache.use_query_cache">true</property>
 		<property name="net.sf.ehcache.configurationResourceName">/ehcache.xml</property>
-       -->
+    	-->
        
-        <!-- ici on configure le comportement lors du lancement d'hibernate -->
-        <!-- valeur = update i..e si les tables de la base n'existent pas 
-        elles sont crees, sinon elles sont MAJ, 
-        la valeur =create i.e. creation à chaque lancement  -->
-        <property name="hbm2ddl.auto">create</property>
-         <property name="hibernate.show_sql">true</property>
         <!-- mapping files/lien vers les fichiers de mapping -->
          <mapping resource="domain/Contact.hbm.xml"/>
          <mapping resource="domain/PhoneNumber.hbm.xml"/>

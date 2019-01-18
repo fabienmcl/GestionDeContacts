@@ -10,13 +10,51 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop.xsd">
-
+        
+        
+	<bean id="dataSource" 
+		  class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+		  destroy-method="getCatalog">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/pwdb" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+	</bean>
+	<bean id="sessionFactory"
+		  class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
+	</bean>
+	
+	<bean id ="transactionManager" 
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
 	<!-- liste des DOA -->
-	<bean id="DAOContact" class="domain.DAOContact"/>
+	<bean id="DAOContact" class="domain.DAOContact">
+		<constructor-arg>
+			<ref bean="sessionFactory"/>
+		</constructor-arg>
+	</bean>
 	
 	<!-- Liste des classes services associé -->
 	<bean id="contactService" class="service.ContactService">
 		<property name="DAOContact" ref="DAOContact"/>
 	</bean>
+	<!-- important lignes standard  > pointer le bon repertoire DAO-->
+	<aop:config>
+		<aop:advisor pointcut="execution(* domain.DAOContact.*(..))"
+			advice-ref="txAdvice" />
+	</aop:config>
+	<!-- important lignes standards -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+	
+	
 
 </beans>
