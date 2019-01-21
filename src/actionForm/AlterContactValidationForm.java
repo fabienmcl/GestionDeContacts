@@ -15,7 +15,9 @@ import domain.Contact;
 
 public class AlterContactValidationForm extends ActionForm {
 
-	private long id=0;   
+	private long id=0;
+	private long idAddress=0;
+	private long idPhone=0;
 	private String firstName=null;
 	private String lastName=null;
 	private String email=null;
@@ -29,8 +31,24 @@ public class AlterContactValidationForm extends ActionForm {
 	  private String siret=null;
 	  
 	  
-	
+	  
 
+
+	public long getIdAddress() {
+		return idAddress;
+	}
+
+	public void setIdAddress(long idAddress) {
+		this.idAddress = idAddress;
+	}
+
+	public long getIdPhone() {
+		return idPhone;
+	}
+
+	public void setIdPhone(long idPhone) {
+		this.idPhone = idPhone;
+	}
 
 	public String getStreet() {
 		return street;

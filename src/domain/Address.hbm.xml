@@ -4,7 +4,7 @@
 <hibernate-mapping package="domain">
 	<class name="Address" table="address_table">
 		<id name="addressId" type="long" column="addressId">
-			<generator class="native" />
+			<generator class="increment" />
 		</id>
 		<property name="street" >
 			<column name="street"></column>

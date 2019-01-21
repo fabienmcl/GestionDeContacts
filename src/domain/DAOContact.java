@@ -87,14 +87,24 @@ public class DAOContact {
 		return contact;
 	}
 	
+	public PhoneNumber getPhone(final long id){
+		PhoneNumber phone=null;
+		try{
+			phone = (PhoneNumber) this.sessionFactory.getCurrentSession().get(PhoneNumber.class, id);
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		return phone;
+	}
+	
 	public Contact getFullContact(final long id){
 		Contact contact=null;
 		try{
 			contact = (Contact) this.sessionFactory.getCurrentSession().get(Contact.class, id);
-			Address add = new Address(contact.getAddress().getStreet(), contact.getAddress().getCity(), contact.getAddress().getZip(), contact.getAddress().getCountry());
+			Address add = new Address(contact.getId(), contact.getAddress().getStreet(), contact.getAddress().getCity(), contact.getAddress().getZip(), contact.getAddress().getCountry());
 			Set<PhoneNumber> phones = new HashSet<PhoneNumber>();
 			for (PhoneNumber phone : contact.getPhones())
-				phones.add(new PhoneNumber(phone.getPhoneKind(), phone.getPhoneNumber()));
+				phones.add(new PhoneNumber(phone.getId(), phone.getPhoneKind(), phone.getPhoneNumber()));
 			
 			contact.setAddress(add);
 			contact.setPhones(phones);

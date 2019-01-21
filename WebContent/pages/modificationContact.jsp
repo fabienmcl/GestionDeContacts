@@ -74,10 +74,12 @@ button {
 	<bean:define id="firstNameContact" name='c' property='firstName'/>
 	<bean:define id="lastNameContact" name='c' property='lastName'/>
 	<bean:define id="emailContact" name='c' property='email'/>
+	<bean:define id="idAddress" name='address' property='addressId'/>
 	<bean:define id="streetContact" name='address' property='street'/>
 	<bean:define id="cityContact" name='address' property='city'/>
 	<bean:define id="zipContact" name='address' property='zip'/>
 	<bean:define id="countryContact" name='address' property='country'/>
+	<bean:define id="idPhone" name='phone' property='id'/>
 	<bean:define id="phonenumberContact" name='phone' property='phoneNumber'/>
 	<bean:define id="phonekindContact" name='phone' property='phoneKind'/>
 	
@@ -94,6 +96,20 @@ button {
 				<td align="right"><bean:message key="form.id" /></td>
 				<td align="left"><html:text property="id" size="30"
 						maxlength="30" value="${idContact}"/></td>
+			</tr>
+			
+						<tr id="notDisplay">
+				<!--  -->
+				<td align="right"></td>
+				<td align="left"><html:text property="idAddress" size="30"
+						maxlength="30" value="${idAddress}"/></td>
+			</tr>
+			
+						<tr id="notDisplay">
+				<!--  -->
+				<td align="right"></td>
+				<td align="left"><html:text property="idPhone" size="30"
+						maxlength="30" value="${idPhone}"/></td>
 			</tr>
 			
 

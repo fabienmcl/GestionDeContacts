@@ -1,5 +1,8 @@
 package servletAction;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,8 +15,10 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
 import actionForm.AlterContactValidationForm;
+import domain.Address;
 import domain.Contact;
 import domain.DAOContact;
+import domain.PhoneNumber;
 import service.ContactService;
 
 import org.springframework.context.ApplicationContext;
@@ -37,6 +42,14 @@ public class AlterContactAction extends Action {
 		final String firstName = lForm.getFirstName();
 		final String lastName = lForm.getLastName();
 		final String email = lForm.getEmail();
+		final long idAddress = lForm.getIdAddress();
+		final String street = lForm.getStreet();
+		final String city = lForm.getCity();
+		final String zip = lForm.getZip();
+		final String country = lForm.getCountry();
+		final long idPhone = lForm.getIdPhone();
+		final String phonekind = lForm.getPhonekind();
+		final String phonenumber = lForm.getPhonenumber();
 
 		
 		
@@ -47,7 +60,17 @@ public class AlterContactAction extends Action {
 		final String lError = lDAOContact.alterContact(id, firstName, lastName, email);
 		*/
 		Contact c = contactService.getDAOContact().getContact(id);
-		final String lError = contactService.alterContact(new Contact(id,firstName,lastName,email, c.getVersion(), c.getAddress(), c.getPhones(), c.getBooks()));
+		
+		Set<PhoneNumber> phones = new HashSet<PhoneNumber>();
+		PhoneNumber phone = contactService.getDAOContact().getPhone(idPhone);
+		phone.setPhoneKind(phonekind);
+		phone.setPhoneNumber(phonenumber);
+		phones.add(phone);
+		
+		Address add = new Address(idAddress, street, city, zip, country);
+		
+		final String lError = contactService.alterContact(new Contact(id,firstName,lastName,email, c.getVersion(), 
+				add, phones, c.getBooks()));
 		
 		if(lError == null) {
 			System.out.println("je suis dans alterContactAction step sucess");
