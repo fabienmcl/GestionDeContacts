@@ -37,12 +37,16 @@ public class ContactService {
 	public List<Contact> getListContact(){
 		return this.contactDAO.getListContact();
 	}
+	
+	public Contact getContact(final long id){
+		return this.contactDAO.getContact(id);
+	}
 	public String alterContact(Contact contact){
 		return this.contactDAO.alterContact(contact);
 	}
 	
-	public String removeContact(final long id, final String email){
+	public boolean removeContact(Contact contact){
 		System.out.println("je suis dans contact service");
-		return this.contactDAO.removeContact(id, email);
+		return this.contactDAO.removeContact(contact);
 	}
 }

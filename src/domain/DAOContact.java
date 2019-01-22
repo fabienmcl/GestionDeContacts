@@ -65,13 +65,15 @@ public class DAOContact {
 	}
 	
 
-	public String removeContact(final long id, final String email){
+	public boolean removeContact(Contact contact){//(final long id, final String email){
 		System.out.println("je suis dans DAOcontact : remove contact");
-		String result = null;
-		Contact contact = this.getContact(id);
+		boolean result;
+		//Contact contact = this.getContact(id);
 		try{
 			this.sessionFactory.getCurrentSession().delete(contact);
+			result = true;
 		}catch (Exception e) {
+			result = false;
 			System.out.println(e.getMessage());
 		}
 		

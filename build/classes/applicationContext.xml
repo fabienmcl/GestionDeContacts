@@ -89,6 +89,18 @@
 	</bean>
 	
 	
+	<!-- AOP LOGGER -->
+	
+	<aop:config>
+		<aop:aspect id="LoggerBean" ref="removerLogger">
+			<aop:before
+				pointcut="execution(boolean domain.DAOContact.removeContact(domain.Contact)) and args(contact)"
+				method="log" arg-names="contact"
+			/>
+		</aop:aspect>
+	</aop:config>
+	<bean id="removerLogger" class="log.AOPLoggerRemover"/>
+	
 	
 
 </beans>
