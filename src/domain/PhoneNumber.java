@@ -32,6 +32,12 @@ public class PhoneNumber {
 		this.phoneKind = phoneKind;
 		this.phoneNumber = phoneNumber;
 	}
+	public PhoneNumber( String phoneKind, String phoneNumber, Contact contact) {
+		super();
+		this.phoneKind = phoneKind;
+		this.phoneNumber = phoneNumber;
+		this.contact = contact;
+	}
 	public PhoneNumber(long id, String phoneKind, String phoneNumber, Contact contact) {
 		super();
 		this.id = id;

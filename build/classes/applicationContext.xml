@@ -58,5 +58,37 @@
 	</tx:advice>
 	
 	
+	
+	<!-- constructor -->
+	
+	<bean id="adresseHomer" class="domain.Address">
+		<constructor-arg type="String" value="430 Spalding Way"/>
+		<constructor-arg type="String" value="Springfield"/>
+		<constructor-arg type="String" value="62701"/>
+		<constructor-arg type="String" value="USA"/>
+	</bean>
+	
+	
+	<bean id="phoneNumberHomer" class="domain.PhoneNumber">
+		<constructor-arg type="String" value="+00" />
+		<constructor-arg type="String" value="123-456-7890" />
+		<property name="contact" ref="contactHomer" />
+	</bean>
+	
+	
+	<bean id="contactHomer" class="domain.Contact" autowire="constructor">
+		<constructor-arg type="String" value="Homer"/>
+		<constructor-arg type="String" value="Simpson"/>
+		<constructor-arg type="String" value="homersimpson@Springfield.com"/>
+		<constructor-arg ref="adresseHomer"/>
+		<constructor-arg>  
+			<set>
+				<ref bean="phoneNumberHomer" />
+			</set>
+		</constructor-arg>
+	</bean>
+	
+	
+	
 
 </beans>

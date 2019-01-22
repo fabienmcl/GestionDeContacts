@@ -167,6 +167,15 @@ public class Contact {
 		this.books = books;
 		this.version = version;
 	}
+	
+	public Contact(String firstName, String lastName, String email, Address address, Set<PhoneNumber> phones) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.address = address;
+		this.phones = phones;
+	}
 
 
 
