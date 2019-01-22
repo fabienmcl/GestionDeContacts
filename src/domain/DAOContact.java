@@ -11,17 +11,18 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
+import util.HibernateUtil;
 
 public class DAOContact {
 	
 	private SessionFactory sessionFactory;
-	
+
 	/*public DAOContact() {
         super();
     }*/
 	public DAOContact(SessionFactory sessionFactory){
 		this.sessionFactory=sessionFactory;
+		
 	}
 	public String addContact(Contact contact) {
 		String result = null;

@@ -11,12 +11,13 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class ContactService {
 	
-	private DAOContact contactDAO;
+	private DAOContact contactDAO = null;
 	
 	public ContactService(){
-		//this.contactDAO = new DAOContact();
 	}
-	
+	public ContactService(DAOContact contactDAO){
+		this.contactDAO = contactDAO;
+	}
 	public void setDAOContact(DAOContact contactDAO) {
 		this.contactDAO = contactDAO;
 	}
