@@ -11,7 +11,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
 
-public class AddContactValidationForm extends ActionForm {
+public class AddContactToGroupValidationForm extends ActionForm {
 
 	private long id=0;   
 	private String firstName=null;
@@ -161,6 +161,7 @@ public class AddContactValidationForm extends ActionForm {
 		
 		System.out.println("je suis dans validate");
 		ActionErrors errors = new ActionErrors();
+
 
 		
 		System.out.println(errors);

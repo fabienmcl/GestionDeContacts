@@ -4,7 +4,7 @@
 <hibernate-mapping package="domain">
 	<class name="ContactGroup" table="ContactGroup_table">
 		<id name="groupId" type="long" column="groupId">
-			 <generator class="native" />
+			 <generator class="increment" />
 		</id>
 		<property name="groupName">
 			<column name="groupName"></column>

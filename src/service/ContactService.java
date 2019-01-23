@@ -3,6 +3,7 @@ package service;
 import java.util.List;
 
 import domain.Contact;
+import domain.ContactGroup;
 import domain.DAOContact;
 import domain.Entreprise;
 
@@ -29,6 +30,8 @@ public class ContactService {
 		return this.contactDAO.addContact(contact);
 	}
 	
+
+	
 	public boolean addEntreprise(Entreprise entreprise){
 		return this.contactDAO.addEntreprise(entreprise);
 	}
@@ -36,6 +39,10 @@ public class ContactService {
 	
 	public List<Contact> getListContact(){
 		return this.contactDAO.getListContact();
+	}
+	
+	public List<ContactGroup> getGroupsContact(){
+		return this.contactDAO.getListGroups();
 	}
 	
 	public Contact getContact(final long id){
@@ -48,5 +55,8 @@ public class ContactService {
 	public boolean removeContact(Contact contact){
 		System.out.println("je suis dans contact service");
 		return this.contactDAO.removeContact(contact);
+	}
+	public boolean addGroup(ContactGroup group) {
+		return this.contactDAO.addGroup(group);
 	}
 }

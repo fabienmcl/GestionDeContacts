@@ -11,7 +11,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
 
-public class AddContactValidationForm extends ActionForm {
+public class AddGroupValidationForm extends ActionForm {
 
 	private long id=0;   
 	private String firstName=null;
@@ -25,10 +25,21 @@ public class AddContactValidationForm extends ActionForm {
 	private String phonenumber=null;
 	  private String phonekind=null;
 	  private String siret=null;
+	  private String groupName=null;
+	  
+	  
 	  
 
 
 	  
+	public String getGroupName() {
+		return groupName;
+	}
+
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
+	}
+
 	public String getSiret() {
 		return siret;
 	}
@@ -161,6 +172,7 @@ public class AddContactValidationForm extends ActionForm {
 		
 		System.out.println("je suis dans validate");
 		ActionErrors errors = new ActionErrors();
+
 
 		
 		System.out.println(errors);

@@ -46,6 +46,25 @@ public class DAOContact {
 		return result;
 	}
 	
+	
+	public boolean addGroup(ContactGroup group) {
+		boolean result;
+		//super.open();
+		
+		try {
+			
+			this.sessionFactory.getCurrentSession().save(group);
+			//contact.setFirstName("Robin");
+			//super.close();
+			result = true;
+		} catch (Exception e) {
+			result = false;
+			System.out.println(e.getMessage());
+
+		}
+		return result;
+	}
+	
 	public boolean addEntreprise(Entreprise entreprise) {
 		boolean result;
 		//super.open();
@@ -151,5 +170,20 @@ public class DAOContact {
 		return listContacts;
 	}
 	
-	
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<ContactGroup> getListGroups() {
+		List<ContactGroup> listGroups = new ArrayList<ContactGroup>();
+		try {
+			List listResultQuery = this.sessionFactory.getCurrentSession().createCriteria(ContactGroup.class).list();
+			for (int i=0; i < listResultQuery.size(); i++) {
+				listGroups.add((ContactGroup) listResultQuery.get(i));
+			}
+
+			//super.close();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return listGroups;
+	}
 }

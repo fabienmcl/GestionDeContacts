@@ -11,6 +11,9 @@
 		<form-bean name="AlterContactValidationForm" type="actionForm.AlterContactValidationForm"/>
 		<form-bean name="MoveContactValidationForm" type="actionForm.MoveContactValidationForm"/>
 		<form-bean name="CheckLoginValidationForm" type="actionForm.CheckLoginValidationForm"/>
+		<form-bean name="AddContactToGroupValidationForm" type="actionForm.AddContactToGroupValidationForm"/>
+		<form-bean name="DeleteGroupValidationForm" type="actionForm.DeleteGroupValidationForm"/>
+		<form-bean name="AddGroupValidationForm" type="actionForm.AddGroupValidationForm"/>
 		
 		
 		<form-bean name="contacts" type="org.apache.struts.validator.DynaValidatorForm">
@@ -24,7 +27,7 @@
 	</form-beans>
 	<action-mappings>
 	<!-- ========== Partie creation contact  =========================== -->
-	<action path="/creationContact" forward="/pages/creationContact.jsp" />
+	<action path="/creationContact" forward="/pages/creationContact.jsp"/>
 
 	<action path="/AddContact" 
 				type="servletAction.AddContactAction"
@@ -35,6 +38,35 @@
 			<forward name="success" path="/listeContact.do" />
 			<forward name="error" path="/pages/creationContact.jsp" />
 	</action>
+	
+	
+<action 
+       path="/AddGroup"
+           name="AddGroupValidationForm"
+       type="servletAction.CreateGroupContactAction" input="/creationGroup.jsp">
+       <forward name="success" path="/creationGroup.do" />
+       <forward name="error" path="/creationGroup.jsp" />
+   </action>
+
+	 <action path="/EditGroup" 
+				type="servletAction.AddContactGroup"
+				name="AddContactToGroupValidationForm" scope="request" 
+				
+				input="/pages/creationGroup.jsp"> 
+				
+			<forward name="success" path="/creationGroup.jsp" />
+			<forward name="error" path="/pages/creationContact.jsp" />
+	</action> 
+	
+		 <action path="/DeleteGroup" 
+				type="servletAction.DeleteContactGroup"
+				name="DeleteGroupValidationForm" scope="request" 
+				
+				input="/pages/creationGroup.jsp"> 
+				
+			<forward name="success" path="/creationGroup.jsp" />
+			<forward name="error" path="/pages/creationContact.jsp" />
+	</action> 
 	
 		<!-- ========== Partie creation entreprise  =========================== -->
 	<action path="/creationEntreprise" forward="/pages/creationEntreprise.jsp" />
@@ -93,6 +125,25 @@
 			<forward name="success" path="/pages/listeContact.jsp"/>
  
 	</action>
+	
+		<action
+			path="/getGroup"
+			type="servletAction.GetGroupContactAction">
+			
+			<forward name="success" path="/pages/creationGroup.jsp"/>
+			
+			</action>
+			
+		<action
+			path="/creationGroup"
+			type="servletAction.CreateGroupContactAction2">
+			
+			<forward name="success" path="/pages/creationGroup.jsp"/>
+			
+			</action>
+
+	
+
 	
 	
 	<!-- ========== Partie login  =========================== -->
