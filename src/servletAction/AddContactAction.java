@@ -81,7 +81,7 @@ public class AddContactAction extends Action {
 		System.out.println("je suis dans addContactAction step dao");
 		//final String lError = lDAOContact.addContact(id, firstName, lastName, email);
 		
-		final String lError;
+		final boolean lError;
 		
 		if(!(numsiret==null) && firstName.isEmpty())
 			lError =contactService.addEntreprise((Entreprise) contact);
@@ -103,7 +103,7 @@ public class AddContactAction extends Action {
 			e.printStackTrace();
 		} 
 		*/
-		if(lError == null) {
+		if(lError == true) {
 			// if no exception is raised,  forward "success"
 			return pMapping.findForward("success");
 			

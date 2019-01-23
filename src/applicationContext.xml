@@ -101,6 +101,16 @@
 	</aop:config>
 	<bean id="removerLogger" class="log.AOPLoggerRemover"/>
 	
+	<aop:config>
+		<aop:aspect id="LoggerBeanS" ref="saverLogger">
+			<aop:before
+				pointcut="execution(boolean domain.DAOContact.addContact(domain.Contact)) and args(contact)"
+				method="log" arg-names="contact"
+			/>
+		</aop:aspect>
+	</aop:config>
+	<bean id="saverLogger" class="log.AOPLoggerSaver"/>
+	
 	
 
 </beans>

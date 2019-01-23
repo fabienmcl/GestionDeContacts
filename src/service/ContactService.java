@@ -25,11 +25,11 @@ public class ContactService {
 		return this.contactDAO;
 	}
 	
-	public String addContact(Contact contact){
+	public boolean addContact(Contact contact){
 		return this.contactDAO.addContact(contact);
 	}
 	
-	public String addEntreprise(Entreprise entreprise){
+	public boolean addEntreprise(Entreprise entreprise){
 		return this.contactDAO.addEntreprise(entreprise);
 	}
 	

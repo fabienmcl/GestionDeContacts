@@ -24,8 +24,8 @@ public class DAOContact {
 		this.sessionFactory=sessionFactory;
 		
 	}
-	public String addContact(Contact contact) {
-		String result = null;
+	public boolean addContact(Contact contact) {
+		boolean result;
 		//super.open();
 		
 		try {
@@ -37,15 +37,17 @@ public class DAOContact {
 			this.sessionFactory.getCurrentSession().save(contact);
 			//contact.setFirstName("Robin");
 			//super.close();
+			result = true;
 		} catch (Exception e) {
+			result = false;
 			System.out.println(e.getMessage());
 
 		}
 		return result;
 	}
 	
-	public String addEntreprise(Entreprise entreprise) {
-		String result = null;
+	public boolean addEntreprise(Entreprise entreprise) {
+		boolean result;
 		//super.open();
 		
 		try {
@@ -57,7 +59,9 @@ public class DAOContact {
 			this.sessionFactory.getCurrentSession().save(entreprise);
 			//contact.setFirstName("Robin");
 			//super.close();
+			result = true;
 		} catch (Exception e) {
+			result = false;
 			System.out.println(e.getMessage());
 
 		}
