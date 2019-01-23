@@ -85,12 +85,12 @@ $(document).ready(function() {
       <a class="navbar-brand" href="#">Gestionnaire de Contact</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="pages/listeContact.do">Home</a></li>
+      <li><a href="javascript:history.back()">Home</a></li>
       <li  class="active" ><a HREF="#"><bean:message key="link.add.contact"/></a></li>
     </ul>
     
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span></a></li>
+      <li><a href="http://localhost:8080/ContactsStruts/"><span class="glyphicon glyphicon-log-in"></span></a></li>
     </ul>
   </div>
 </nav>
