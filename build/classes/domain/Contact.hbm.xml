@@ -38,7 +38,7 @@
 	</set>
 	-->
 	
-	<set name="books" table="contactgroups" inverse="true" lazy="false" cascade="all-delete-orphan">
+	<set name="books" table="contactgroups" inverse="true" lazy="false">
 			<key column="contactId" ></key>
 			<many-to-many column="groupId" class="ContactGroup"></many-to-many>
 		</set>
