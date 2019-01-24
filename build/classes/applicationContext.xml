@@ -95,6 +95,7 @@
 		<property name="contact" ref="contactMarge" />
 	</bean>
 	
+	
 	<bean id="phoneNumberNed" class="domain.PhoneNumber">
 		<constructor-arg type="String" value="+00" />
 		<constructor-arg type="String" value="123-123-1234" />
