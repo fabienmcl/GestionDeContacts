@@ -74,14 +74,14 @@
 		<constructor-arg type="String" value="62701"/>
 		<constructor-arg type="String" value="USA"/>
 	</bean>
-	<!-- 
+	
 	<bean id="adresseDuff" class="domain.Address">
 		<constructor-arg type="String" value="98 Rue de la République"/>
 		<constructor-arg type="String" value="Le Teil"/>
 		<constructor-arg type="String" value="07400"/>
 		<constructor-arg type="String" value="FR"/>
 	</bean>
-	-->
+	
 	
 	<bean id="phoneNumberHomer" class="domain.PhoneNumber">
 		<constructor-arg type="String" value="+00" />
@@ -95,18 +95,19 @@
 		<property name="contact" ref="contactMarge" />
 	</bean>
 	
+	
 	<bean id="phoneNumberNed" class="domain.PhoneNumber">
 		<constructor-arg type="String" value="+00" />
 		<constructor-arg type="String" value="123-123-1234" />
 		<property name="contact" ref="contactNed" />
 	</bean>
-	<!-- 
+	
 	<bean id="phoneNumberDuff" class="domain.PhoneNumber">
 		<constructor-arg type="String" value="+33" />
 		<constructor-arg type="String" value="09-54-75-67-72" />
-		<property name="entreprise" ref="entrepriseDuff" />
+		<property name="contact" ref="entrepriseDuff" />
 	</bean>
-	-->
+	
 	<bean id="contactHomer" class="domain.Contact" autowire="constructor">
 		<constructor-arg type="String" value="Homer"/>
 		<constructor-arg type="String" value="Simpson"/>
@@ -155,6 +156,21 @@
 		</constructor-arg>
 	</bean>
 	-->
+	
+	<bean id="entrepriseDuff" class="domain.Entreprise" autowire="constructor">
+		<property name="numSiret" value="34893951300068" />
+		<property name="lastName" value="Brasserie DUFF"/>
+		<property name="firstName" value=""/>
+		<property name="email" value="brasserie.duff@Springfield.com"/>
+		<property name="address" ref="adresseDuff"/>
+		 
+		<property name="phones">  
+			<set>
+				<ref bean="phoneNumberDuff" />
+			</set>
+		</property>
+		
+	</bean>
 	
 	<!-- AOP LOGGER -->
 	
