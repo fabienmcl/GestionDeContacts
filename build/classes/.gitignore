@@ -1,12 +1,4 @@
-/Resources.properties
-/Resources_fr.properties
-/Resources_fr_FR.properties
-/actionForm/
-/applicationContext.xml
-/domain/
-/ehcache.xml
-/hibernate.cfg.xml
-/log/
-/service/
 /servletAction/
-/util/
+/actionForm/
+/domain/
+/service/

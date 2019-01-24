@@ -18,12 +18,13 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import actionForm.AddContactToGroupValidationForm;
 import actionForm.AddContactToGroupValidationForm2;
 import actionForm.AlterContactValidationForm;
+import actionForm.DeleteContactFromGroupValidationForm;
 import domain.Contact;
 import domain.ContactGroup;
 import domain.DAOContact;
 import service.ContactService;
 
-public class AddContactToGroup2 extends Action{
+public class DeleteContactFromGroupAction extends Action{
  
 	public ActionForward execute(ActionMapping mapping,ActionForm form,
 		HttpServletRequest request,HttpServletResponse response) 
@@ -33,7 +34,7 @@ public class AddContactToGroup2 extends Action{
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		final ContactService contactService = (ContactService) context.getBean("contactService");
 		
-		final AddContactToGroupValidationForm2 lForm=(AddContactToGroupValidationForm2) form;
+		final DeleteContactFromGroupValidationForm lForm=(DeleteContactFromGroupValidationForm) form;
 		
 		
 		
@@ -48,7 +49,7 @@ public class AddContactToGroup2 extends Action{
 		Contact contact = contactService.getContact(idContact);
 	
 		
-		contactService.updateGroupWithContact(groupId, idContact);
+		contactService.deleteContactInGroup(groupId, idContact);
 		
 		
 		List<Contact> listContactsJDBC = contactService.getListContact();

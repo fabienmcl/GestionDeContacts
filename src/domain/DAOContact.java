@@ -197,6 +197,25 @@ public class DAOContact {
 		return result;
 	}
 	
+	public String deleteContactInGroup(long groupId, long contactId) {
+		
+		String result = null;
+		try {
+			
+			ContactGroup group = (ContactGroup) sessionFactory.getCurrentSession().get(ContactGroup.class, groupId);
+			Contact contact = (Contact) sessionFactory.getCurrentSession().get(Contact.class, contactId);
+	
+			group.getContacts().remove(contact);
+			contact.getBooks().remove(group);
+			this.sessionFactory.getCurrentSession().saveOrUpdate(contact);
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+
+		}
+		return result;
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Contact> getListContact() {
@@ -209,6 +228,29 @@ public class DAOContact {
 
 			//super.close();
 		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return listContacts;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<Contact> getListContactGroup(long id) {
+		
+		
+		
+		List<Contact> listContacts = new ArrayList<Contact>();
+		
+		
+		try {
+			ContactGroup group = (ContactGroup) sessionFactory.getCurrentSession().get(ContactGroup.class, id);
+			
+			for(Contact c : group.getContacts())
+				listContacts.add(c);
+			}
+
+			//super.close();
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 		return listContacts;

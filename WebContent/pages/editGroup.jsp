@@ -104,6 +104,7 @@ $(document).ready(function() {
 	<div>
 	<div class="form-group pull-right">
     <input type="text" class="search form-control" placeholder="What you looking for?">
+    <h4>Contact à ajouter</h4>
 </div>
 <span class="counter pull-right"></span>
 <table  class="table table-striped table-hover table-bordered results">
@@ -148,6 +149,52 @@ $(document).ready(function() {
 	        </logic:iterate>
 </tbody>
 </table>
+
+<h4>Contact déjà dans le groupe</h4>
+<table  class="table table-striped table-hover table-bordered results">
+  <thead > 
+    <tr>
+      <th>#</th>
+      <th class="col-md-5 col-xs-5">Status</th>
+      <th class="col-md-5 col-xs-5">Lastname</th>
+      <th class="col-md-4 col-xs-4">FirstName</th>
+      <th class="col-md-3 col-xs-3">email</th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr class="warning no-result">
+      <td colspan="4"><i class="fa fa-warning"></i> No result</td>
+    </tr>
+  </thead>
+  <tbody>
+  <tbody>
+			<logic:iterate name="listContactsGroup" id="itemJDBC">
+		        <tr class="clickable-row">
+		        	<td><bean:write name="itemJDBC" property="id"/></td>
+		        	<td>${itemJDBC.firstName==""?"entreprise":"contact"}</td>
+		            <td><bean:write name="itemJDBC" property="lastName"/></td>
+		            <td><bean:write name="itemJDBC" property="firstName"/></td>
+		            <td><bean:write name="itemJDBC" property="email"/></td>
+		            <td>
+		            	<html:form action="/DeleteContactFromGroup">
+							<html:hidden property="id" name="itemJDBC" value="${itemJDBC.id}" />
+							<html:hidden property="firstName" name="itemJDBC" value="${itemJDBC.firstName}" />
+							<html:hidden property="lastName" name="itemJDBC" value="${itemJDBC.lastName}" />
+							<html:hidden property="email" name="itemJDBC" value="${itemJDBC.email}" />
+							<html:hidden property="groupId" name="group" value="${id}" />
+							<html:hidden property="groupName" name="group" value="${name}" />
+							<html:submit styleClass="btn btn-danger btn-xs">
+										Delete from group
+							</html:submit>
+						</html:form>
+					</td>
+					
+		        </tr>
+	        </logic:iterate>
+</tbody>
+</table>
+
+
 	</div>	
 </body>
 </html>

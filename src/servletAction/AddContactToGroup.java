@@ -2,6 +2,7 @@ package servletAction;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,13 +39,29 @@ public class AddContactToGroup extends Action{
 		
 		ContactGroup group = contactService.getGroup(id);
 		
+		List<Contact> filteredlist = new ArrayList<Contact>();
+		
 		List<Contact> listContactsJDBC = contactService.getListContact();
-		request.setAttribute("listContactsJDBC", listContactsJDBC );
+		List<Contact> listContactsGroup = contactService.getListContactGroup(id);
+		
+		if(!listContactsGroup.isEmpty()) {
+			filteredlist = listContactsJDBC.stream().filter(c -> isIdPresent(c, listContactsGroup)).collect(Collectors.toList());
+		}else {
+			filteredlist = listContactsJDBC;
+		}
+		
+		
+		request.setAttribute("listContactsJDBC", filteredlist );
+		request.setAttribute("listContactsGroup", listContactsGroup);
 		request.setAttribute("group", group);
 		
 		return mapping.findForward("success");
 		
 
+	}
+	
+	private static boolean isIdPresent(final Contact contact, List<Contact> contacts) {
+		return !contacts.stream().filter(c -> c.getId()==(contact.getId())).findAny().isPresent();
 	}
  
 }
