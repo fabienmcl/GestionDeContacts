@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Set;
 
 public class Entreprise  extends Contact{
 	String numSiret;
@@ -21,6 +22,16 @@ public class Entreprise  extends Contact{
 		super.setEmail(email);
 		super.setAddress(add);
 	}
+	
+	public Entreprise(String numsiret2, String lastName, String email, Address add, Set<PhoneNumber> phones) {
+		this.numSiret = numsiret2;
+		super.setFirstName("");
+		super.setLastName(lastName);
+		super.setEmail(email);
+		super.setAddress(add);
+		super.setPhones(phones);
+	}
+	
 	
 	
 
