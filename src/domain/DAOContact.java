@@ -178,6 +178,25 @@ public class DAOContact {
 		return result;
 	}
 	
+	public String updateGroupWithContact(long groupId, long contactId) {
+		
+		String result = null;
+		try {
+			
+			ContactGroup group = (ContactGroup) sessionFactory.getCurrentSession().get(ContactGroup.class, groupId);
+			Contact contact = (Contact) sessionFactory.getCurrentSession().get(Contact.class, contactId);
+	
+			group.getContacts().add(contact);
+			contact.getBooks().add(group);
+			this.sessionFactory.getCurrentSession().saveOrUpdate(contact);
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+
+		}
+		return result;
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Contact> getListContact() {

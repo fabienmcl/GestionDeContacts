@@ -16,9 +16,11 @@
 			<many-to-many column="contactId" class="Contact"></many-to-many>
 		</set>
 		-->
-		<set name="contacts" table="ContactGroups" inverse="true">
-			<key column="groupeId"/>
-			<many-to-many class="Contact" column="contactId" />
+		
+		<set name="contacts" table="contactgroups" lazy="true" >
+			<key column="groupId" ></key>
+			<many-to-many column="contactId" class="Contact"></many-to-many>
 		</set>
+		
 	</class>
 </hibernate-mapping>

@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ContactGroup {
-	private long groupId;
+	private long groupId=0;
 	String groupName;
 	private Set<Contact> contacts = new HashSet<Contact>();
 	private int version;

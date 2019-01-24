@@ -66,7 +66,7 @@ $(document).ready(function() {
 	});
 </script>
 
-<title><bean:message key="list.page.title2"/></title>
+<title><bean:message key="list.page.title"/></title>
 </head>
 <body>
 
@@ -80,7 +80,7 @@ $(document).ready(function() {
       <li class="active"><a href="#">Home</a></li>
       <li><a HREF="creationContact.do"><bean:message key="link.add.contact"/></a></li>
       <li><a HREF="creationEntreprise.do"><bean:message key="link.add.entreprise"/></a></li>
-      <li><a HREF="creationGroup.do"><bean:message key="link.add.group"/></a></li>
+      <li><a HREF="getGroup.do"><bean:message key="link.add.group"/></a></li>
      <li><a HREF="creationContact.do">Injecter base de test</a></li>
      <!-- 
      deux conatcts rempli : 2 tels, une adress, 2  group de contact
@@ -98,21 +98,9 @@ $(document).ready(function() {
 		<h1>Gestionnaire de contact</h1>
 		
 	</div>
-			           <td>
-		            	 <html:form action="/AddGroup">
-		            	 
-		            	 			<tr>
-				<td align="right"><bean:message key="form.lastname" /></td>
-				<td align="left"><html:text property="groupName" size="30"
-						maxlength="30" value="groupe" /></td>
-			</tr>
-		            	 
-							<html:submit styleClass="btn btn-danger btn-xs">
-										Add Group
-							</html:submit>
-						</html:form>
-					</td>
-
+	<bean:define id="id" name='group' property='groupId'/>
+	<bean:define id="name" name='group' property='groupName'/>
+	<h3>Ajouter des contacts au groupe : ${name}</h3>
 	<div>
 	<div class="form-group pull-right">
     <input type="text" class="search form-control" placeholder="What you looking for?">
@@ -122,9 +110,10 @@ $(document).ready(function() {
   <thead > 
     <tr>
       <th>#</th>
-      <th class="col-md-5 col-xs-5">Nom</th>
-      <th class="col-md-5 col-xs-5">Edit</th>
-      <th class="col-md-4 col-xs-4">Delete</th>
+      <th class="col-md-5 col-xs-5">Status</th>
+      <th class="col-md-5 col-xs-5">Lastname</th>
+      <th class="col-md-4 col-xs-4">FirstName</th>
+      <th class="col-md-3 col-xs-3">email</th>
       <th></th>
       <th></th>
     </tr>
@@ -134,31 +123,26 @@ $(document).ready(function() {
   </thead>
   <tbody>
   <tbody>
-			<logic:iterate name="listGroupsJDBC" id="itemJDBC">
+			<logic:iterate name="listContactsJDBC" id="itemJDBC">
 		        <tr class="clickable-row">
-		        	<td><bean:write name="itemJDBC" property="groupId"/></td>
-		            <td><bean:write name="itemJDBC" property="groupName"/></td>
-		            
-		           <td>
-		            	 <html:form action="/EditGroup">
-							<html:hidden property="groupId" name="itemJDBC" value="${itemJDBC.groupId}" />
-							<html:hidden property="groupName" name="itemJDBC" value="${itemJDBC.groupName}" />
+		        	<td><bean:write name="itemJDBC" property="id"/></td>
+		        	<td>${itemJDBC.firstName==""?"entreprise":"contact"}</td>
+		            <td><bean:write name="itemJDBC" property="lastName"/></td>
+		            <td><bean:write name="itemJDBC" property="firstName"/></td>
+		            <td><bean:write name="itemJDBC" property="email"/></td>
+		            <td>
+		            	<html:form action="/AddContactToGroup">
+							<html:hidden property="id" name="itemJDBC" value="${itemJDBC.id}" />
+							<html:hidden property="firstName" name="itemJDBC" value="${itemJDBC.firstName}" />
+							<html:hidden property="lastName" name="itemJDBC" value="${itemJDBC.lastName}" />
+							<html:hidden property="email" name="itemJDBC" value="${itemJDBC.email}" />
+							<html:hidden property="groupId" name="group" value="${id}" />
+							<html:hidden property="groupName" name="group" value="${name}" />
 							<html:submit styleClass="btn btn-danger btn-xs">
-										Edit Group
+										Add to Group
 							</html:submit>
 						</html:form>
 					</td>
-					
-					<td>
-		            	 <html:form action="/DeleteGroup">
-							<html:hidden property="groupId" name="itemJDBC" value="${itemJDBC.groupId}" />
-							<html:hidden property="groupName" name="itemJDBC" value="${itemJDBC.groupName}" />
-							<html:submit styleClass="btn btn-danger btn-xs">
-										Delete Group
-							</html:submit>
-						</html:form>
-					</td>
-		     
 					
 		        </tr>
 	        </logic:iterate>

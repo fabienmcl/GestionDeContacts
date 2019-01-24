@@ -57,6 +57,10 @@ public class ContactService {
 		return this.contactDAO.alterContact(contact);
 	}
 	
+	public String updateGroupWithContact(long groupId, long idContact){
+		return this.contactDAO.updateGroupWithContact(groupId, idContact);
+	}
+	
 	public boolean removeContact(Contact contact){
 		System.out.println("je suis dans contact service");
 		return this.contactDAO.removeContact(contact);

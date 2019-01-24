@@ -11,15 +11,51 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
 
-public class AddContactToGroupValidationForm extends ActionForm {
+public class AddContactToGroupValidationForm2 extends ActionForm {
 
-	  private long groupId=0;
+	private long id=0;
+	private String firstName=null;
+	private String lastName=null;
+	private String email=null;
+	private long groupId=0;
 	  private String groupName=null;
 	  
-
-
+	  
+	  
 	  
 
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public long getGroupId() {
 		return groupId;

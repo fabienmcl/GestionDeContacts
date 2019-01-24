@@ -12,6 +12,7 @@
 		<form-bean name="MoveContactValidationForm" type="actionForm.MoveContactValidationForm"/>
 		<form-bean name="CheckLoginValidationForm" type="actionForm.CheckLoginValidationForm"/>
 		<form-bean name="AddContactToGroupValidationForm" type="actionForm.AddContactToGroupValidationForm"/>
+		<form-bean name="AddContactToGroupValidationForm2" type="actionForm.AddContactToGroupValidationForm2"/>
 		<form-bean name="DeleteGroupValidationForm" type="actionForm.DeleteGroupValidationForm"/>
 		<form-bean name="AddGroupValidationForm" type="actionForm.AddGroupValidationForm"/>
 		
@@ -49,13 +50,23 @@
    </action>
 
 	 <action path="/EditGroup" 
-				type="servletAction.AddContactGroup"
+				type="servletAction.AddContactToGroup"
 				name="AddContactToGroupValidationForm" scope="request" 
 				
-				input="/pages/creationGroup.jsp"> 
+				input="/pages/editGroup.jsp"> 
 				
-			<forward name="success" path="/creationGroup.jsp" />
-			<forward name="error" path="/pages/creationContact.jsp" />
+			<forward name="success" path="/pages/editGroup.jsp" />
+			<forward name="error" path="/pages/listeContact.jsp" />
+	</action> 
+	
+		 <action path="/AddContactToGroup" 
+				type="servletAction.AddContactToGroup2"
+				name="AddContactToGroupValidationForm2" scope="request" 
+				
+				input="/pages/editGroup.jsp"> 
+				
+			<forward name="success" path="/pages/editGroup.jsp" />
+			<forward name="error" path="/pages/listeContact.jsp" />
 	</action> 
 	
 		 <action path="/DeleteGroup" 
