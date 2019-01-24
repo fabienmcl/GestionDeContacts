@@ -1,6 +1,8 @@
 package servletAction;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +23,7 @@ import actionForm.RemoveContactValidationForm;
 import domain.Address;
 import domain.Contact;
 import domain.DAOContact;
+import domain.PhoneNumber;
 import service.ContactService;
 
 
@@ -36,9 +39,21 @@ public class InjectAction extends Action{
 		
 		
 		Contact homer = (Contact) context.getBean("contactHomer");
-		Contact h = new Contact(homer.getFirstName(),homer.getLastName(),homer.getEmail(), new Address(homer.getAddress().getStreet(),homer.getAddress().getCity(),homer.getAddress().getZip(),homer.getAddress().getCountry()));
-		//System.out.println(homer.toString());
-		contactService.addContact(h);
+		Address addressHomer =  new Address(homer.getAddress().getStreet(),homer.getAddress().getCity(),homer.getAddress().getZip(),homer.getAddress().getCountry());
+		Contact homerReel = new Contact(homer.getFirstName(),homer.getLastName(),homer.getEmail(),addressHomer);
+		
+		if(homer.getPhones().isEmpty()){
+			System.out.println(homer.toString());
+			
+		}else{
+			Set<PhoneNumber> phones = new HashSet<PhoneNumber>();
+			PhoneNumber p = homer.getPhones().iterator().next();
+			PhoneNumber phone = new PhoneNumber(p.getPhoneKind(),p.getPhoneNumber());
+			phone.setContact(homerReel);
+			phones.add(phone);
+			homerReel.setPhones(phones);
+		}
+		contactService.addContact(homerReel);
 		
 		
 		List<Contact> listContactsJDBC = contactService.getListContact();

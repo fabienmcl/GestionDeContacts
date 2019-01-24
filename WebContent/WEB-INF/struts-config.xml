@@ -94,6 +94,14 @@
  
 	</action>
 	
+		<!-- ========== Partie Injection ======================== -->
+	<action
+			path="/inject"
+			type="servletAction.InjectAction">
+ 
+			<forward name="success" path="/listeContact"/>
+ 
+	</action>
 	
 	<!-- ========== Partie login  =========================== -->
 	
