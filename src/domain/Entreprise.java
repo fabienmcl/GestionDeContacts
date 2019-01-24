@@ -21,6 +21,8 @@ public class Entreprise  extends Contact{
 		super.setEmail(email);
 		super.setAddress(add);
 	}
+	
+	
 
 
 	public String getNumSiret() {

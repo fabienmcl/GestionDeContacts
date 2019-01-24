@@ -39,8 +39,16 @@ public class InjectAction extends Action{
 		
 		
 		Contact homer = (Contact) context.getBean("contactHomer");
+		Contact marge = (Contact) context.getBean("contactMarge");
+		Contact ned = (Contact) context.getBean("contactNed");
+		
 		Address addressHomer =  new Address(homer.getAddress().getStreet(),homer.getAddress().getCity(),homer.getAddress().getZip(),homer.getAddress().getCountry());
+		Address addressMarge =  new Address(marge.getAddress().getStreet(),marge.getAddress().getCity(),marge.getAddress().getZip(),marge.getAddress().getCountry());
+		Address addressNed =  new Address(ned.getAddress().getStreet(),ned.getAddress().getCity(),ned.getAddress().getZip(),ned.getAddress().getCountry());
+		
 		Contact homerReel = new Contact(homer.getFirstName(),homer.getLastName(),homer.getEmail(),addressHomer);
+		Contact margeReel = new Contact(marge.getFirstName(),marge.getLastName(),marge.getEmail(),addressMarge);
+		Contact nedReel = new Contact(ned.getFirstName(),ned.getLastName(),ned.getEmail(),addressNed);
 		
 		if(homer.getPhones().isEmpty()){
 			System.out.println(homer.toString());
@@ -52,9 +60,26 @@ public class InjectAction extends Action{
 			phone.setContact(homerReel);
 			phones.add(phone);
 			homerReel.setPhones(phones);
+			
+			phones = new HashSet<PhoneNumber>();
+			p = marge.getPhones().iterator().next();
+			phone = new PhoneNumber(p.getPhoneKind(),p.getPhoneNumber());
+			phone.setContact(margeReel);
+			phones.add(phone);
+			margeReel.setPhones(phones);
+			
+			phones = new HashSet<PhoneNumber>();
+			p = ned.getPhones().iterator().next();
+			phone = new PhoneNumber(p.getPhoneKind(),p.getPhoneNumber());
+			phone.setContact(nedReel);
+			phones.add(phone);
+			nedReel.setPhones(phones);
+			
+			
 		}
 		contactService.addContact(homerReel);
-		
+		contactService.addContact(margeReel);
+		contactService.addContact(nedReel);
 		
 		List<Contact> listContactsJDBC = contactService.getListContact();
 		
