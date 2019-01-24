@@ -37,10 +37,11 @@
 		<many-to-many column="groupId" class="ContactGroup"></many-to-many>
 	</set>
 	-->
-	<set name="books" table="ContactGroups" >
-		<key column="contactId"/>
-		<many-to-many class="ContactGroup" column="groupId" />
-	</set>
+	
+	<set name="books" table="contactgroups" inverse="true" lazy="false" cascade="all-delete-orphan">
+			<key column="contactId" ></key>
+			<many-to-many column="groupId" class="ContactGroup"></many-to-many>
+		</set>
 	
 		<subclass name="Entreprise" discriminator-value="entreprise">
 			<property name="numSiret" type="string"></property>

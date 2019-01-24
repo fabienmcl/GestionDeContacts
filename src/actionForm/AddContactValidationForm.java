@@ -162,16 +162,6 @@ public class AddContactValidationForm extends ActionForm {
 		System.out.println("je suis dans validate");
 		ActionErrors errors = new ActionErrors();
 
-		if( getFirstName()== null || getFirstName().length() < 1 ) {
-			if(!(getSiret().length()>=1))
-				errors.add("first name",new ActionMessage("creation.fn.error.required"));
-		}
-		if( getLastName()== null || getLastName().length() < 1 ) {
-				errors.add("last name",new ActionMessage("creation.ln.error.required"));
-		}
-		if( getEmail() == null || getEmail().length() < 1 || validateEmail(email)==false) {
-			errors.add("email", new ActionMessage("creation.email.error.required"));
-		}
 		
 		System.out.println(errors);
 		

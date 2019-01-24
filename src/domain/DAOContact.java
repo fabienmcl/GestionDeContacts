@@ -46,6 +46,25 @@ public class DAOContact {
 		return result;
 	}
 	
+	
+	public boolean addGroup(ContactGroup group) {
+		boolean result;
+		//super.open();
+		
+		try {
+			
+			this.sessionFactory.getCurrentSession().save(group);
+			//contact.setFirstName("Robin");
+			//super.close();
+			result = true;
+		} catch (Exception e) {
+			result = false;
+			System.out.println(e.getMessage());
+
+		}
+		return result;
+	}
+	
 	public boolean addEntreprise(Entreprise entreprise) {
 		boolean result;
 		//super.open();
@@ -84,6 +103,21 @@ public class DAOContact {
 		return result;
 	}
 	
+	public boolean removeGroup(ContactGroup group){//(final long id, final String email){
+		System.out.println("je suis dans DAOcontact : remove contact");
+		boolean result;
+		//Contact contact = this.getContact(id);
+		try{
+			this.sessionFactory.getCurrentSession().delete(group);
+			result = true;
+		}catch (Exception e) {
+			result = false;
+			System.out.println(e.getMessage());
+		}
+		
+		return result;
+	}
+	
 	public Contact getContact(final long id){
 		Contact contact=null;
 		try{
@@ -92,6 +126,16 @@ public class DAOContact {
 			System.out.println(e.getMessage());
 		}
 		return contact;
+	}
+	
+	public ContactGroup getGroup(final long id){
+		ContactGroup group=null;
+		try{
+			group = (ContactGroup) this.sessionFactory.getCurrentSession().get(ContactGroup.class, id);
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		return group;
 	}
 	
 	public PhoneNumber getPhone(final long id){
@@ -134,6 +178,44 @@ public class DAOContact {
 		return result;
 	}
 	
+	public String updateGroupWithContact(long groupId, long contactId) {
+		
+		String result = null;
+		try {
+			
+			ContactGroup group = (ContactGroup) sessionFactory.getCurrentSession().get(ContactGroup.class, groupId);
+			Contact contact = (Contact) sessionFactory.getCurrentSession().get(Contact.class, contactId);
+	
+			group.getContacts().add(contact);
+			contact.getBooks().add(group);
+			this.sessionFactory.getCurrentSession().saveOrUpdate(contact);
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+
+		}
+		return result;
+	}
+	
+	public String deleteContactInGroup(long groupId, long contactId) {
+		
+		String result = null;
+		try {
+			
+			ContactGroup group = (ContactGroup) sessionFactory.getCurrentSession().get(ContactGroup.class, groupId);
+			Contact contact = (Contact) sessionFactory.getCurrentSession().get(Contact.class, contactId);
+	
+			group.getContacts().remove(contact);
+			contact.getBooks().remove(group);
+			this.sessionFactory.getCurrentSession().saveOrUpdate(contact);
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+
+		}
+		return result;
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Contact> getListContact() {
@@ -151,5 +233,43 @@ public class DAOContact {
 		return listContacts;
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<Contact> getListContactGroup(long id) {
+		
+		
+		
+		List<Contact> listContacts = new ArrayList<Contact>();
+		
+		
+		try {
+			ContactGroup group = (ContactGroup) sessionFactory.getCurrentSession().get(ContactGroup.class, id);
+			
+			for(Contact c : group.getContacts())
+				listContacts.add(c);
+			}
+
+			//super.close();
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return listContacts;
+	}
 	
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<ContactGroup> getListGroups() {
+		List<ContactGroup> listGroups = new ArrayList<ContactGroup>();
+		try {
+			List listResultQuery = this.sessionFactory.getCurrentSession().createCriteria(ContactGroup.class).list();
+			for (int i=0; i < listResultQuery.size(); i++) {
+				listGroups.add((ContactGroup) listResultQuery.get(i));
+			}
+
+			//super.close();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return listGroups;
+	}
 }

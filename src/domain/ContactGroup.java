@@ -4,40 +4,51 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ContactGroup {
-	int groupId;
+	private long groupId=0;
 	String groupName;
 	private Set<Contact> contacts = new HashSet<Contact>();
 	private int version;
 	
 	public ContactGroup() {
 		super();
+		this.groupName = "group" + groupId;
+		version=0;
 	}
-	public ContactGroup(int groupId) {
+	public ContactGroup(long groupId) {
 		super();
 		this.groupId = groupId;
+		version=0;
 	}
-	public ContactGroup(int groupId, String groupName) {
+	public ContactGroup(long groupId, String groupName) {
 		super();
 		this.groupId = groupId;
 		this.groupName = groupName;
+		version=0;
 	}
-	public ContactGroup(int groupId, String groupName, Set<Contact> contacts) {
+	public ContactGroup(String groupName) {
+		super();
+		this.groupName = groupName;
+		version=0;
+	}
+	public ContactGroup(long groupId, String groupName, Set<Contact> contacts) {
 		super();
 		this.groupId = groupId;
 		this.groupName = groupName;
 		this.contacts = contacts;
+		version=0;
 	}
-	public ContactGroup(int groupId, String groupName, Set<Contact> contacts, int version) {
+	public ContactGroup(long groupId, String groupName, Set<Contact> contacts, int version) {
 		super();
 		this.groupId = groupId;
 		this.groupName = groupName;
 		this.contacts = contacts;
 		this.version = version;
+		version=0;
 	}
-	public int getGroupId() {
+	public long getGroupId() {
 		return groupId;
 	}
-	public void setGroupId(int groupId) {
+	public void setGroupId(long groupId) {
 		this.groupId = groupId;
 	}
 	public String getGroupName() {
