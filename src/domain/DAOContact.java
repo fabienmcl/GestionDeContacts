@@ -103,6 +103,21 @@ public class DAOContact {
 		return result;
 	}
 	
+	public boolean removeGroup(ContactGroup group){//(final long id, final String email){
+		System.out.println("je suis dans DAOcontact : remove contact");
+		boolean result;
+		//Contact contact = this.getContact(id);
+		try{
+			this.sessionFactory.getCurrentSession().delete(group);
+			result = true;
+		}catch (Exception e) {
+			result = false;
+			System.out.println(e.getMessage());
+		}
+		
+		return result;
+	}
+	
 	public Contact getContact(final long id){
 		Contact contact=null;
 		try{
@@ -111,6 +126,16 @@ public class DAOContact {
 			System.out.println(e.getMessage());
 		}
 		return contact;
+	}
+	
+	public ContactGroup getGroup(final long id){
+		ContactGroup group=null;
+		try{
+			group = (ContactGroup) this.sessionFactory.getCurrentSession().get(ContactGroup.class, id);
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		return group;
 	}
 	
 	public PhoneNumber getPhone(final long id){

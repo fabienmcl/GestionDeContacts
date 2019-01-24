@@ -151,7 +151,7 @@ $(document).ready(function() {
 					
 					<td>
 		            	 <html:form action="/DeleteGroup">
-							<html:hidden property="id" name="itemJDBC" value="${itemJDBC.groupId}" />
+							<html:hidden property="groupId" name="itemJDBC" value="${itemJDBC.groupId}" />
 							<html:hidden property="groupName" name="itemJDBC" value="${itemJDBC.groupName}" />
 							<html:submit styleClass="btn btn-danger btn-xs">
 										Delete Group

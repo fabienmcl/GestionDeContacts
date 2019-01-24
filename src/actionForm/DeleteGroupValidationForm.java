@@ -13,139 +13,33 @@ import org.apache.struts.action.ActionMessage;
 
 public class DeleteGroupValidationForm extends ActionForm {
 
-	private long id=0;   
-	private String firstName=null;
-	private String lastName=null;
-	private String email=null;
-	  private String street=null;
-	  private String city=null;
-	  private String country=null;
-	  private String zip=null;
-
-	private String phonenumber=null;
-	  private String phonekind=null;
-	  private String siret=null;
+	  private long groupId;
+	  private String groupName;
 	  
 
 
 	  
-	public String getSiret() {
-		return siret;
+
+
+	public long getGroupId() {
+		return groupId;
 	}
 
-	public void setSiret(String siret) {
-		this.siret = siret;
+	public void setGroupId(long groupId) {
+		this.groupId = groupId;
 	}
 
-	public String getStreet() {
-		return street;
+	public String getGroupName() {
+		return groupName;
 	}
 
-	public void setStreet(String street) {
-		this.street = street;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
-	public String getZip() {
-		return zip;
-	}
-
-	public void setZip(String zip) {
-		this.zip = zip;
-	}
-
-	public String getPhonenumber() {
-		return phonenumber;
-	}
-
-	public void setPhonenumber(String phonenumber) {
-		this.phonenumber = phonenumber;
-	}
-
-	public String getPhonekind() {
-		return phonekind;
-	}
-
-	public void setPhonekind(String phonekind) {
-		this.phonekind = phonekind;
-	}
-
-	/**
-	 * @return Email
-	 */
-	public String getEmail() {
-		return email;
-	}
-
-	/**
-	 * @return First Name
-	 */
-	public String getFirstName() {
-		return firstName;
-	}
-
-	/** 
-	 * @return Last name
-	 */
-	public String getLastName() {
-		return lastName;
-	}
-
-	/**
-	 * @param string Sets the Email
-	 */
-	public void setEmail(String string) {
-		email = string;
-	}
-
-	/**
-	 * @param string Sets the First Name
-	 */
-	public void setFirstName(String string) {
-		firstName = string;
-	}
-
-	/**
-	 * @param string sets the Last Name
-	 */
-	public void setLastName(String string) {
-		lastName = string;
-	}
-
-	/**
-	 * @return ID Returns ID
-	 */
-	public long getId() {
-		return id;
-	}
-
-	/**
-	 * @param l Sets the ID
-	 */
-	public void setId(long l) {
-		id = l;
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
 	}
 
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
-		this.id=0;
-		this.firstName=null;
-		this.lastName=null;
-		this.email=null;
+		this.groupId = 0;
+		this.groupName = "";
 	}
 
 	public static final Pattern VALID_EMAIL_ADDRESS_REGEX = 

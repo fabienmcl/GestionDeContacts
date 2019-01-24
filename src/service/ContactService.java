@@ -48,6 +48,11 @@ public class ContactService {
 	public Contact getContact(final long id){
 		return this.contactDAO.getContact(id);
 	}
+	
+	public ContactGroup getGroup(final long id){
+		return this.contactDAO.getGroup(id);
+	}
+	
 	public String alterContact(Contact contact){
 		return this.contactDAO.alterContact(contact);
 	}
@@ -56,6 +61,12 @@ public class ContactService {
 		System.out.println("je suis dans contact service");
 		return this.contactDAO.removeContact(contact);
 	}
+	
+	public boolean removeGroup(ContactGroup group){
+		System.out.println("je suis dans contact service");
+		return this.contactDAO.removeGroup(group);
+	}
+	
 	public boolean addGroup(ContactGroup group) {
 		return this.contactDAO.addGroup(group);
 	}

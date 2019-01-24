@@ -59,12 +59,12 @@
 	</action> 
 	
 		 <action path="/DeleteGroup" 
-				type="servletAction.DeleteContactGroup"
+				type="servletAction.DeleteGroupAction"
 				name="DeleteGroupValidationForm" scope="request" 
 				
 				input="/pages/creationGroup.jsp"> 
 				
-			<forward name="success" path="/creationGroup.jsp" />
+			<forward name="success" path="/creationGroup.do" />
 			<forward name="error" path="/pages/creationContact.jsp" />
 	</action> 
 	
