@@ -12,25 +12,30 @@ public class ContactGroup {
 	public ContactGroup() {
 		super();
 		this.groupName = "group" + groupId;
+		version=0;
 	}
 	public ContactGroup(long groupId) {
 		super();
 		this.groupId = groupId;
+		version=0;
 	}
 	public ContactGroup(long groupId, String groupName) {
 		super();
 		this.groupId = groupId;
 		this.groupName = groupName;
+		version=0;
 	}
 	public ContactGroup(String groupName) {
 		super();
 		this.groupName = groupName;
+		version=0;
 	}
 	public ContactGroup(long groupId, String groupName, Set<Contact> contacts) {
 		super();
 		this.groupId = groupId;
 		this.groupName = groupName;
 		this.contacts = contacts;
+		version=0;
 	}
 	public ContactGroup(long groupId, String groupName, Set<Contact> contacts, int version) {
 		super();
@@ -38,6 +43,7 @@ public class ContactGroup {
 		this.groupName = groupName;
 		this.contacts = contacts;
 		this.version = version;
+		version=0;
 	}
 	public long getGroupId() {
 		return groupId;
