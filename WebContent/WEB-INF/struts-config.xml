@@ -157,8 +157,8 @@
 			path="/inject"
 			type="servletAction.InjectAction">
  
-			<forward name="success" path="/listeContact"/>
- 
+			<forward name="success" path="/listeContact.do"/>
+ 			<forward name="error" path="/listeContact.do"/>
 	</action>
 
 		<action
