@@ -19,7 +19,7 @@
 		</set>
 		-->
 		
-		<set name="contacts" table="contactgroups" lazy="true"  >
+		<set name="contacts" table="contactgroups" lazy="false"  >
 			<key column="groupId" ></key>
 			<many-to-many column="contactId" class="Contact"></many-to-many>
 		</set>

@@ -1,3 +1,5 @@
 /domain/
+/log/
+/service/
 /servletAction/
-/actionForm/
+/util/

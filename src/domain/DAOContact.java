@@ -93,6 +93,13 @@ public class DAOContact {
 		boolean result;
 		//Contact contact = this.getContact(id);
 		try{
+			
+			for(ContactGroup cg : contact.getBooks()) {
+				cg.getContacts().remove(contact);
+				this.sessionFactory.getCurrentSession().saveOrUpdate(cg);
+			}
+			contact.setBooks(null);
+			
 			this.sessionFactory.getCurrentSession().delete(contact);
 			result = true;
 		}catch (Exception e) {
