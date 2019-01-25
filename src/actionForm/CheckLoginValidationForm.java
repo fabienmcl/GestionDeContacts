@@ -66,6 +66,10 @@ public class CheckLoginValidationForm extends ActionForm {
 		if( getLastName()== null || getLastName().length() < 1 ) {
 			errors.add("last name",new ActionMessage("login.ln.error.required"));
 		}
+		if( !getLastName().equals(getFirstName()) ) {
+			errors.add("first last name",new ActionMessage("login.error.required"));
+		}
+		
 		System.out.println(errors);
 		
 		return errors;

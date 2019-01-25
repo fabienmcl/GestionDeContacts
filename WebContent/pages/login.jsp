@@ -337,6 +337,7 @@ h1{
 			<html:form action="/CheckLogin">
 				<html:errors property="first name"/>
 				<html:errors property="last name"/>
+				<html:errors property="first last name"/>
 				<table>
 
 					
