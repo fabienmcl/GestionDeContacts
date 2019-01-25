@@ -53,7 +53,7 @@ button {
       <a class="navbar-brand" href="#">Gestionnaire de Contact</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="listeContact.do">Home</a></li>
+      <li><a href="javascript:history.back()">Home</a></li>
       <li  class="active" ><a HREF="#">Modifier un contact</a></li>
     </ul>
     

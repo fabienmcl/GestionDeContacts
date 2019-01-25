@@ -29,6 +29,8 @@
 		
 	</form-beans>
 	<action-mappings>
+	<!-- ==========  home ============================================== -->
+	<action path="/home" forward="/listeContact.do"/>
 	<!-- ========== Partie creation contact  =========================== -->
 	<action path="/creationContact" forward="/pages/creationContact.jsp"/>
 

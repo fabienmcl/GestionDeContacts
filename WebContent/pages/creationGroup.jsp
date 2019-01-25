@@ -77,10 +77,8 @@ $(document).ready(function() {
       <a class="navbar-brand" href="#">Gestionnaire de Contact</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a HREF="creationContact.do"><bean:message key="link.add.contact"/></a></li>
-      <li><a HREF="creationEntreprise.do"><bean:message key="link.add.entreprise"/></a></li>
-      <li><a HREF="creationGroup.do"><bean:message key="link.add.group"/></a></li>
+      <li> <a href="home.do">Home</a></li>
+      <li class="active" ><a HREF="creationGroup.do"><bean:message key="link.add.group"/></a></li>
      <li><a HREF="creationContact.do">Injecter base de test</a></li>
      <!-- 
      deux conatcts rempli : 2 tels, une adress, 2  group de contact

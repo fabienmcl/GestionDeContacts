@@ -86,7 +86,7 @@ $(document).ready(function() {
     </div>
     <ul class="nav navbar-nav">
       <li><a href="javascript:history.back()">Home</a></li>
-      <li  class="active" ><a HREF="#"><bean:message key="link.add.contact"/></a></li>
+      <li  class="active" ><a HREF="#">Ajouter Entreprise</a></li>
     </ul>
     
     <ul class="nav navbar-nav navbar-right">
